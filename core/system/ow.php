@@ -15,9 +15,11 @@ defined('ROOT') OR exit('No direct script access allowed');
      */
     public static function run(){
 
-        // demarage des middlewares 
+        /**
+         * Demarage des middlewares
+         */
         $response = OW_System::launch_middlewares();
-        
+
     }
 
  }

@@ -30,6 +30,8 @@ defined('ROOT') OR exit('No direct script access allowed');
     public static $Middlewares = array();
     private static $middleware_analysed = -1;
     private static $middleware_analysing_incoming_request = true;
+    private static $Default_controller = "Starter";
+    private static $Default_method = "index";
 
 
     /**
@@ -72,6 +74,46 @@ defined('ROOT') OR exit('No direct script access allowed');
     public static function register_route(){
         debug("Register Middleware");
     }
+
+     /**
+      * Fonction d'enregistrement du default controller
+      *
+      * @param $controller_name
+      */
+     public static function register_default_controller($controller_name){
+
+         self::$Default_controller = $controller_name;
+
+     }
+
+     /**
+      * Fonction permettant de retouner  default controller
+      */
+     public static function get_default_controller(){
+
+         return self::$Default_controller ;
+
+     }
+
+     /**
+      * Fonction d'enregistrement de la default method
+      *
+      * @param $controller_method
+      */
+     public static function register_default_method($controller_method){
+
+         self::$Default_method = $controller_method;
+
+     }
+
+     /**
+      * Fonction permettant de retouner  la default method
+      */
+     public static function get_default_method(){
+
+         return self::$Default_method ;
+
+     }
 
     /**
      * Fonction qui execute de maniere recursive les middlewares
