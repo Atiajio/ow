@@ -1,0 +1,64 @@
+0- Structure
+    definir les deux types de requetes : ow_ajax_request, et la requete normale
+1- console (types de bases : system, application, middleware, migrations)
+2- testUnitaires
+3- migrations
+4- middleware
+5- Model, view, Controller, Middleware auto generator
+6- Online MVC, Middleware editing
+7- Parrallel programming when important (beaucoup) de threads quand pn parcour les array : ecrire des functions common pour cela
+8- Controll editing mode like offer edit document (global user with Id and IP Save)
+9- form generator in 2 ways (html code with classes and ids) or array return generator
+10- Unique file upload (md5_file)
+11- Log system
+12- sauberkeit du code (typage de parametre, documentation ....)
+13- integrer tous les systemes de payement
+
+
+Details pour la console
+    0- Structure
+    Aussi simple que possible
+    1- Console: differente commandes
+        system : 
+                --version
+                --stats
+                --update
+                --add admin
+                --update admin
+                --delete admin
+                --list admins
+                --show admin -p 4564
+                --config : show
+                           set 
+                           reset
+                           delete
+        application(parfois c est pour systeme) :
+                --modules:
+                        list
+                        create
+                        edit
+                        delete
+                --migration : make
+                              migrate
+                              rebase -p 4548787 (la position pour faire le rebase)
+                              delete -p 34343435 
+                              export -p 4654463(export la derniere version si sans -p, la version avec p au cas contraire)
+                              import -file
+                              show --all
+                              show -p 4545
+                --middleware : seulement de chez les apps
+                              list
+                              create
+                              edit
+                              delete
+                --tests:
+                        register
+                        delete
+                        list
+                        show
+                        run --all
+                        run -p 45646
+                --contoller 
+                --model
+                --view 
+

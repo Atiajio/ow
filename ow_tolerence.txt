@@ -1,0 +1,7 @@
+1- au niveaus de l' auto load, il ya la funtion qui autoload a configurer. elle doit 
+    permettre de ne pas repondre brutalement quand elle ne trouve pas le fichier de la classe
+    correspondante. solution : en prod mode => des qu une classe n'est pas loadable, stopper tout et retourner une response 
+    avec statut error et le nom du fichier qui na pas pu etre chargé dans la variable respose. le user poura bien gerer comme il veut
+
+2- pour toutes les varible defini globalement dans les configs de l'utilisateur (App)
+    refaire un test d'initialisation dans les config du system(Core) pour eviter que le User ne supprime certains parametres importants
