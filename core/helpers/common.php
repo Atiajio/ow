@@ -47,9 +47,11 @@ function str_containt($haystack, $needle)
 /**
  * Debuging function
  *  usefull to structure the data during devellepement
+ *
+ * @param $data
+ * @param bool $hard_stop
  */
-
- function debug($data)
+ function debug($data, $hard_stop = false)
  {
      echo "
         <div style=\" background-color:#258E65; padding:20px; font-weight : bolder; color:white; margin : 20px; overflow-x:scroll; \">
@@ -64,9 +66,21 @@ function str_containt($haystack, $needle)
 
     }
 
-    echo "
-            </pre>
+    echo "<br>";
+
+     $bt = debug_backtrace();
+     $caller = array_shift($bt);
+     echo $caller['file'];
+     echo ";  Line number : ";
+     echo $caller['line'];
+
+     echo " </pre>
         </div>
     ";
-    
+
+    if ( $hard_stop == true) {
+
+        die();
+
+    }
  }

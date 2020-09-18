@@ -84,6 +84,7 @@ defined('ROOT') OR exit('No direct script access allowed');
       */
      protected $content;
 
+     protected  $content_sent =  false;
 
      /**
       * @var int
@@ -166,6 +167,15 @@ defined('ROOT') OR exit('No direct script access allowed');
 
 
      /**
+      * OW_Response constructor.
+      * @param OW_Request $request
+      */
+     public function __construct(OW_Request $request)
+     {
+         $this->headers = $request->getHeaders();
+     }
+
+     /**
       */
      public function getHeaders()
      {
@@ -243,6 +253,23 @@ defined('ROOT') OR exit('No direct script access allowed');
      {
          $this->statusCode = $statusCode;
      }
+
+     /**
+      * @return bool
+      */
+     public function isContentSent()
+     {
+         return $this->content_sent;
+     }
+
+     /**
+      * @param bool $content_sent
+      */
+     public function setContentSent($content_sent)
+     {
+         $this->content_sent = $content_sent;
+     }
+
 
      /**
       * @return string

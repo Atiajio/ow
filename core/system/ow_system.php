@@ -60,7 +60,7 @@ defined('ROOT') OR exit('No direct script access allowed');
         
         if (is_null(OW_System::$Response)) {
 
-            OW_System::$Response = new OW_Response();
+            OW_System::$Response = new OW_Response(OW_System::$Request);
 
         }
        
@@ -72,7 +72,7 @@ defined('ROOT') OR exit('No direct script access allowed');
      * Fonction d'enregistrement des routes
      */
     public static function register_route(){
-        debug("Register Middleware");
+        debug("Register Route");
     }
 
      /**
@@ -132,11 +132,43 @@ defined('ROOT') OR exit('No direct script access allowed');
 
             } else {
 
-                // ici on a atteind le fond de la ligne , ce qui signifie qu'on a atteind le controller
-                debug("je suis dans le Contoller");
-                
                 // Actions du controller
+                $controller = OW_System::$Request->getAttributes()['controller'];
+                $controller = new $controller();
 
+                $method = OW_System::$Request->getAttributes()['method'];
+                $params = OW_System::$Request->getAttributes()['params'];
+
+                if ( ! ($controller instanceof  OW_Controller) ) {
+
+                    debug(" Controller '". OW_System::$Request->getAttributes()['controller'] ."' is not instance of OW_Controller ");
+
+
+                } else {
+
+
+                    if (method_exists($controller, $method)){
+
+                        $controller->setRequest(OW_System::$Request);
+                        $controller->setResponse(OW_System::$Response);
+
+                        call_user_func_array([$controller, $method], $params);
+
+                    }else {
+
+                        if (SYSTEM_MODE == 'DEV') {
+
+                            debug("Method '" . $method . "' not found in Controller '" . OW_System::$Request->getAttributes()['controller'] . "'");
+
+                        } else {
+
+                            /**
+                             * inteligent managing
+                             */
+                        }
+                    }
+
+                }
 
 
                 // retour de la reponse
@@ -145,4 +177,5 @@ defined('ROOT') OR exit('No direct script access allowed');
             }
         } 
     }
+
  }

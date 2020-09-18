@@ -20,6 +20,32 @@ defined('ROOT') OR exit('No direct script access allowed');
          */
         $response = OW_System::launch_middlewares();
 
+        if ($response->isContentSent()) {
+            /**
+             * Retrour de la reponse en fonction du mode UI installé
+             */
+
+            /**
+             * Cas REACT
+             */
+
+
+            /**
+             * CAS QUASAR
+             */
+
+            /**
+             * Normale framework case
+             */
+
+
+            debug("Resquest was created and managed !!! ");
+
+        } else {
+
+            debug('The Controller mus call the function respond() LIKE  $this->respond(); at the end of the controller function. ');
+
+        }
     }
 
  }

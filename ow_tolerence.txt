@@ -5,3 +5,5 @@
 
 2- pour toutes les varible defini globalement dans les configs de l'utilisateur (App)
     refaire un test d'initialisation dans les config du system(Core) pour eviter que le User ne supprime certains parametres importants
+
+3- faire en sorte que l autoloader prenne en compte les espaces de noms

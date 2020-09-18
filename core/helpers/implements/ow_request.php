@@ -41,6 +41,11 @@ class OW_Request extends OW_Base_Package{
     public $query;
 
     /**
+     * Url params
+     */
+    public $params;
+
+    /**
      * Server and execution environment parameters ($_SERVER).
      *
      */
@@ -186,7 +191,7 @@ class OW_Request extends OW_Base_Package{
         if ($this->server["path_info"] != null) {
 
             $attr_tmp = explode("/", trim($this->server["path_info"], '/'));
-            debug($this->server["path_info"]);
+
             $this->attributes['controller'] = ucwords($attr_tmp[0]);
 
             array_shift($attr_tmp);
@@ -202,6 +207,26 @@ class OW_Request extends OW_Base_Package{
             $this->attributes['controller'] = OW_System::get_default_controller();
             $this->attributes['method'] = OW_System::get_default_method();
             $this->attributes['params'] = array();
+
+        }
+
+        /**
+         * Initialisation des parametres d'urls
+         */
+
+        $this->params = $this->attributes['params'];
+
+        /**
+         * Initialisation du header
+         */
+
+        if ($this->server['server_software'] != null && !str_containt($this->server['server_software'], "Apache")) {
+
+            $this->headers  = new OW_Header($this->nginx_request_headers());
+
+        } else {
+
+            $this->headers  = new OW_Header($this->apache_request_headers());
 
         }
     }
@@ -333,6 +358,95 @@ class OW_Request extends OW_Base_Package{
     {
         $this->method = $method;
     }
- 
+
+    /**
+     * @return mixed
+     */
+    public function getHeaders()
+    {
+        return $this->headers;
+    }
+
+    /**
+     * @param mixed $headers
+     */
+    public function setHeaders($headers)
+    {
+        $this->headers = $headers;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getParams()
+    {
+        return $this->params;
+    }
+
+    /**
+     * @param mixed $params
+     */
+    public function setParams($params)
+    {
+        $this->params = $params;
+    }
+
+
+
+    /**
+     * Function permettant de generer le header pour un serveur apache
+     * @return mixed
+     */
+    private function apache_request_headers()
+    {
+
+        foreach($_SERVER as $key => $value) {
+
+            if (substr($key,0,5)=="HTTP_") {
+
+                $key=str_replace(" ","-",ucwords(strtolower(str_replace("_"," ",substr($key,5)))));
+                $out[$key]=$value;
+
+            }else if ($key == "CONTENT_TYPE") {
+
+                $headers["Content-Type"] = $value;
+
+            } else if ($key == "CONTENT_LENGTH") {
+
+                $headers["Content-Length"] = $value;
+
+            }
+        }
+        return $out;
+
+    }
+
+    /**
+     * Function permettant de generer le header pour un serveur nginx
+     * @return mixed
+     */
+    private function nginx_request_headers()
+    {
+
+        $headers = [];
+        foreach ($_SERVER as $name => $value) {
+
+            if (substr($name, 0, 5) == 'HTTP_') {
+
+                $headers[str_replace(' ', '-', ucwords(strtolower(str_replace('_', ' ', substr($name, 5)))))] = $value;
+
+            } else if ($name == "CONTENT_TYPE") {
+
+                $headers["Content-Type"] = $value;
+
+            } else if ($name == "CONTENT_LENGTH") {
+
+                $headers["Content-Length"] = $value;
+
+            }
+
+        }
+        return $headers;
+    }
 
 }
