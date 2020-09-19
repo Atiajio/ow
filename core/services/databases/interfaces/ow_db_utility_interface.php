@@ -1,6 +1,6 @@
 <?php
 
-interface OW_Utility_Interface {
+interface OW_Db_Utility_Interface {
 
     /**
      * Return the list of existing databases
@@ -52,24 +52,24 @@ interface OW_Utility_Interface {
     /**
      * Generate CSV from a query result object
      *
-     * @param	object	$query		Query result object
+     * @param	OW_Base_Result	$query		Query result object
      * @param	string	$delim		Delimiter (default: ,)
      * @param	string	$newline	Newline character (default: \n)
      * @param	string	$enclosure	Enclosure (default: ")
      * @return	string
      */
-     function csv_from_result($query, $delim = ',', $newline = "\n", $enclosure = '"');
+     function csv_from_result(OW_Base_Result $query, $delim = ',', $newline = "\n", $enclosure = '"');
 
     // --------------------------------------------------------------------
 
     /**
      * Generate XML data from a query result object
      *
-     * @param	object	$query	Query result object
+     * @param	OW_Base_Result	$query	Query result object
      * @param	array	$params	Any preferences
      * @return	string
      */
-     function xml_from_result($query, $params = array());
+     function xml_from_result(OW_Base_Result $query, $params = array());
 
     // --------------------------------------------------------------------
 

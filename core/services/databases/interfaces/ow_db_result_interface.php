@@ -1,17 +1,11 @@
 <?php
 
-/**
- * Security script access
- */
-defined('ROOT') OR exit('No direct script access allowed');
-
-class OW_Base_Result implements  OW_Result_Interface {
-
+interface OW_Db_Result_Interface {
     /**
      * Return the number of Entry for the current request
      *
      */
-    function num_rows(){}
+     function num_rows();
 
     // --------------------------------------------------------------------
 
@@ -21,7 +15,7 @@ class OW_Base_Result implements  OW_Result_Interface {
      * @param	string	$type	'object', 'array' or a custom class name
      * @return	array
      */
-    function result($type = 'object'){}
+     function result($type = 'object');
 
     // --------------------------------------------------------------------
 
@@ -31,7 +25,7 @@ class OW_Base_Result implements  OW_Result_Interface {
      * @param	string	$class_name
      * @return	array
      */
-    function custom_result_object($class_name){}
+     function custom_result_object($class_name);
 
     // --------------------------------------------------------------------
 
@@ -40,7 +34,7 @@ class OW_Base_Result implements  OW_Result_Interface {
      *
      * @return	array
      */
-    function result_object(){}
+     function result_object();
 
     // --------------------------------------------------------------------
 
@@ -49,7 +43,7 @@ class OW_Base_Result implements  OW_Result_Interface {
      *
      * @return	array
      */
-    function result_array(){}
+     function result_array();
 
     // --------------------------------------------------------------------
 
@@ -62,7 +56,7 @@ class OW_Base_Result implements  OW_Result_Interface {
      * @param	string	$type	'object' or 'array'
      * @return	mixed
      */
-    function row($n = 0, $type = 'object'){}
+     function row($n = 0, $type = 'object');
 
     // --------------------------------------------------------------------
 
@@ -73,7 +67,7 @@ class OW_Base_Result implements  OW_Result_Interface {
      * @param	mixed	$value
      * @return	void
      */
-    function set_row($key, $value = NULL){}
+     function set_row($key, $value = NULL);
 
     // --------------------------------------------------------------------
 
@@ -84,7 +78,7 @@ class OW_Base_Result implements  OW_Result_Interface {
      * @param	string	$type
      * @return	object
      */
-    function custom_row_object($n, $type){}
+     function custom_row_object($n, $type);
 
     // --------------------------------------------------------------------
 
@@ -94,7 +88,7 @@ class OW_Base_Result implements  OW_Result_Interface {
      * @param	int	$n
      * @return	object
      */
-    function row_object($n = 0){}
+     function row_object($n = 0);
 
     // --------------------------------------------------------------------
 
@@ -104,7 +98,7 @@ class OW_Base_Result implements  OW_Result_Interface {
      * @param	int	$n
      * @return	array
      */
-    function row_array($n = 0){}
+     function row_array($n = 0);
 
     // --------------------------------------------------------------------
 
@@ -114,7 +108,7 @@ class OW_Base_Result implements  OW_Result_Interface {
      * @param	string	$type
      * @return	mixed
      */
-    function first_row($type = 'object'){}
+     function first_row($type = 'object');
 
     // --------------------------------------------------------------------
 
@@ -124,7 +118,7 @@ class OW_Base_Result implements  OW_Result_Interface {
      * @param	string	$type
      * @return	mixed
      */
-    function last_row($type = 'object'){}
+     function last_row($type = 'object');
 
     // --------------------------------------------------------------------
 
@@ -134,7 +128,7 @@ class OW_Base_Result implements  OW_Result_Interface {
      * @param	string	$type
      * @return	mixed
      */
-    function next_row($type = 'object'){}
+     function next_row($type = 'object');
 
     // --------------------------------------------------------------------
 
@@ -144,7 +138,7 @@ class OW_Base_Result implements  OW_Result_Interface {
      * @param	string	$type
      * @return	mixed
      */
-    function previous_row($type = 'object'){}
+     function previous_row($type = 'object');
 
     // --------------------------------------------------------------------
 
@@ -154,7 +148,7 @@ class OW_Base_Result implements  OW_Result_Interface {
      * @param	string	$type	'array', 'object' or a custom class name
      * @return	mixed
      */
-    function unbuffered_row($type = 'object'){}
+     function unbuffered_row($type = 'object');
 
     // --------------------------------------------------------------------
 
@@ -177,7 +171,7 @@ class OW_Base_Result implements  OW_Result_Interface {
      *
      * @return	int
      */
-    function num_fields(){}
+     function num_fields();
 
     // --------------------------------------------------------------------
 
@@ -190,7 +184,7 @@ class OW_Base_Result implements  OW_Result_Interface {
      *
      * @return	array
      */
-    function list_fields(){}
+     function list_fields();
 
     // --------------------------------------------------------------------
 
@@ -203,7 +197,7 @@ class OW_Base_Result implements  OW_Result_Interface {
      *
      * @return	array
      */
-    function field_data(){}
+     function field_data();
 
     // --------------------------------------------------------------------
 
@@ -214,7 +208,7 @@ class OW_Base_Result implements  OW_Result_Interface {
      *
      * @return	void
      */
-    function free_result(){}
+     function free_result();
 
     // --------------------------------------------------------------------
 
@@ -230,33 +224,6 @@ class OW_Base_Result implements  OW_Result_Interface {
      * @param	int	$n
      * @return	bool
      */
-    function data_seek($n = 0){}
-
-    // --------------------------------------------------------------------
-
-    /**
-     * Result - associative array
-     *
-     * Returns the result set as an array.
-     *
-     * Overridden by driver result classes.
-     *
-     * @return	array
-     */
-    function _fetch_assoc(){}
-
-    // --------------------------------------------------------------------
-
-    /**
-     * Result - object
-     *
-     * Returns the result set as an object.
-     *
-     * Overridden by driver result classes.
-     *
-     * @param	string	$class_name
-     * @return	object
-     */
-    function _fetch_object($class_name = 'stdClass'){}
+     function data_seek($n = 0);
 
 }

@@ -6,5 +6,7 @@
             "email": "nandjouvermont@gmail.com"
         }
     ],
-    "require": {}
+    "require": {
+      "ext-mysql": "*"
+    }
 }

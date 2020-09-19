@@ -30,7 +30,6 @@ require_once(ROOT . DS . 'app' . DS . 'configs' . DS .'config.php' );
 require_once(ROOT . DS . 'app' . DS . 'configs' . DS .'routes.php' );
 require_once(ROOT . DS . 'app' . DS . 'configs' . DS .'middlewares.php' );
 
-
 /**
  * Demarage du systeme
  */

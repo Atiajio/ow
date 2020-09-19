@@ -7,9 +7,9 @@ defined('ROOT') OR exit('No direct script access allowed');
 
 class OW_DB {
 
-    private static $db;
-    private static $forge;
-    private static $all_db;
+    public static $db;
+    public static $forge;
+    public static $all_db;
 
     /**
      * Initialize all databases
@@ -31,8 +31,7 @@ class OW_DB {
         /**
          * initialisation de la premiere base de données comme celle par defaut.
          */
-
-
+        self::$db = OW_Base_Db::DB($params[0]);
     }
 
     /**
@@ -41,7 +40,7 @@ class OW_DB {
     public static function getDb()
     {
         return self::$db;
-        debug("je suis bien dans la fonction de la db");
+
     }
 
     /**

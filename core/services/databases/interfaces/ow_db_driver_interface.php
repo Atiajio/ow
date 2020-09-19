@@ -5,7 +5,7 @@
  */
 defined('ROOT') OR exit('No direct script access allowed');
 
-interface OW_Driver_Interface {
+interface OW_Db_Driver_Interface {
 
     /**
      * Initialize Database Settings
@@ -100,15 +100,6 @@ interface OW_Driver_Interface {
      * @return	string
      */
     public function version();
-
-    // --------------------------------------------------------------------
-
-    /**
-     * Version number query string
-     *
-     * @return	string
-     */
-     function _version();
 
     // --------------------------------------------------------------------
 
@@ -320,16 +311,6 @@ interface OW_Driver_Interface {
     // --------------------------------------------------------------------
 
     /**
-     * Platform-dependent string escape
-     *
-     * @param	string
-     * @return	string
-     */
-     function _escape_str($str);
-
-    // --------------------------------------------------------------------
-
-    /**
      * Primary
      *
      * Retrieves the primary key. It assumes that the row in the first
@@ -358,7 +339,7 @@ interface OW_Driver_Interface {
     /**
      * Returns an array of table names
      *
-     * @param	string	$constrain_by_prefix = FALSE
+     * @param	string|bool	$constrain_by_prefix = FALSE
      * @return	array
      */
     public function list_tables($constrain_by_prefix = FALSE);
@@ -430,20 +411,6 @@ interface OW_Driver_Interface {
     // --------------------------------------------------------------------
 
     /**
-     * Insert statement
-     *
-     * Generates a platform-specific insert string from the supplied data
-     *
-     * @param	string	the table name
-     * @param	array	the insert keys
-     * @param	array	the insert values
-     * @return	string
-     */
-     function _insert($table, $keys, $values);
-
-    // --------------------------------------------------------------------
-
-    /**
      * Generate an update string
      *
      * @param	string	the table upon which the query will be performed
@@ -452,39 +419,6 @@ interface OW_Driver_Interface {
      * @return	string
      */
     public function update_string($table, $data, $where);
-
-    // --------------------------------------------------------------------
-
-    /**
-     * Update statement
-     *
-     * Generates a platform-specific update string from the supplied data
-     *
-     * @param	string	the table name
-     * @param	array	the update data
-     * @return	string
-     */
-     function _update($table, $values);
-
-    // --------------------------------------------------------------------
-
-    /**
-     * Tests whether the string has an SQL operator
-     *
-     * @param	string
-     * @return	bool
-     */
-     function _has_operator($str);
-
-    // --------------------------------------------------------------------
-
-    /**
-     * Returns the SQL string operator
-     *
-     * @param	string
-     * @return	string
-     */
-     function _get_operator($str);
 
     // --------------------------------------------------------------------
 
@@ -547,33 +481,11 @@ interface OW_Driver_Interface {
     // --------------------------------------------------------------------
 
     /**
-     * Initialize the Cache Class
-     *
-     * @return	bool
-     */
-     function _cache_init();
-
-    // --------------------------------------------------------------------
-
-    /**
      * Close DB Connection
      *
      * @return	void
      */
     public function close();
-
-    // --------------------------------------------------------------------
-
-    /**
-     * Close DB Connection
-     *
-     * This method would be overridden by most of the drivers.
-     *
-     * @return	void
-     */
-     function _close();
-
-    // --------------------------------------------------------------------
 
     /**
      * Display an error message
@@ -616,15 +528,5 @@ interface OW_Driver_Interface {
     public function protect_identifiers($item, $prefix_single = FALSE, $protect_identifiers = NULL, $field_exists = TRUE);
 
     // --------------------------------------------------------------------
-
-    /**
-     * Dummy method that allows Query Builder class to be disabled
-     * and keep count_all() working.
-     *
-     * @return	void
-     */
-     function _reset_select();
-
-
 
 }
