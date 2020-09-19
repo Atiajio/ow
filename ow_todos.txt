@@ -13,6 +13,8 @@
 11- Log system
 12- sauberkeit du code (typage de parametre, documentation ....)
 13- integrer tous les systemes de payement
+14- intrgrer le systeme des observeurs pour le control des erreurs
+15- penser a regarder le cours de openclassroom sur les elements du design pattern et controller notre code avec
 
 
 Details pour la console

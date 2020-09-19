@@ -5,7 +5,7 @@
  */
 defined('ROOT') OR exit('No direct script access allowed');
 
-interface OW_Forge_Interface {
+class OW_Base_Forge implements  OW_Forge_Interface {
 
     /**
      * Create database
@@ -13,7 +13,7 @@ interface OW_Forge_Interface {
      * @param	string	$db_name
      * @return	bool
      */
-     function create_database($db_name);
+    function create_database($db_name){}
 
     // --------------------------------------------------------------------
 
@@ -23,7 +23,7 @@ interface OW_Forge_Interface {
      * @param	string	$db_name
      * @return	bool
      */
-     function drop_database($db_name);
+    function drop_database($db_name){}
 
     // --------------------------------------------------------------------
 
@@ -34,7 +34,7 @@ interface OW_Forge_Interface {
      * @param	bool	$primary
      * @return	CI_DB_forge
      */
-     function add_key($key, $primary = FALSE);
+    function add_key($key, $primary = FALSE){}
 
     // --------------------------------------------------------------------
 
@@ -44,7 +44,7 @@ interface OW_Forge_Interface {
      * @param	array	$field
      * @return	CI_DB_forge
      */
-     function add_field($field);
+    function add_field($field){}
 
     // --------------------------------------------------------------------
 
@@ -56,7 +56,7 @@ interface OW_Forge_Interface {
      * @param	array	$attributes	Associative array of table attributes
      * @return	bool
      */
-     function create_table($table, $if_not_exists = FALSE, array $attributes = array());
+    function create_table($table, $if_not_exists = FALSE, array $attributes = array()){}
 
     // --------------------------------------------------------------------
 
@@ -68,7 +68,7 @@ interface OW_Forge_Interface {
      * @param	array	$attributes	Associative array of table attributes
      * @return	mixed
      */
-     function _create_table($table, $if_not_exists, $attributes);
+    function _create_table($table, $if_not_exists, $attributes){}
 
     // --------------------------------------------------------------------
 
@@ -78,7 +78,7 @@ interface OW_Forge_Interface {
      * @param	array	$attributes	Associative array of table attributes
      * @return	string
      */
-     function _create_table_attr($attributes);
+    function _create_table_attr($attributes){}
     // --------------------------------------------------------------------
 
     /**
@@ -88,7 +88,7 @@ interface OW_Forge_Interface {
      * @param	bool	$if_exists	Whether to add an IF EXISTS condition
      * @return	bool
      */
-     function drop_table($table_name, $if_exists = FALSE);
+    function drop_table($table_name, $if_exists = FALSE){}
 
     // --------------------------------------------------------------------
 
@@ -101,7 +101,7 @@ interface OW_Forge_Interface {
      * @param	bool	$if_exists	Whether to add an IF EXISTS condition
      * @return	mixed	(Returns a platform-specific DROP table string, or TRUE to indicate there's nothing to do)
      */
-     function _drop_table($table, $if_exists);
+    function _drop_table($table, $if_exists){}
 
     // --------------------------------------------------------------------
 
@@ -112,7 +112,7 @@ interface OW_Forge_Interface {
      * @param	string	$new_table_name	New table name
      * @return	bool
      */
-     function rename_table($table_name, $new_table_name);
+    function rename_table($table_name, $new_table_name){}
 
     // --------------------------------------------------------------------
 
@@ -125,7 +125,7 @@ interface OW_Forge_Interface {
      * @param	string	$_after	Column for AFTER clause (deprecated)
      * @return	bool
      */
-     function add_column($table, $field, $_after = NULL);
+    function add_column($table, $field, $_after = NULL){}
 
     // --------------------------------------------------------------------
 
@@ -136,7 +136,7 @@ interface OW_Forge_Interface {
      * @param	string	$column_name	Column name
      * @return	bool
      */
-     function drop_column($table, $column_name);
+    function drop_column($table, $column_name){}
 
     // --------------------------------------------------------------------
 
@@ -147,7 +147,7 @@ interface OW_Forge_Interface {
      * @param	string	$field	Column definition
      * @return	bool
      */
-     function modify_column($table, $field);
+    function modify_column($table, $field){}
 
     // --------------------------------------------------------------------
 
@@ -159,7 +159,7 @@ interface OW_Forge_Interface {
      * @param	mixed	$field		Column definition
      * @return	string|string[]
      */
-     function _alter_table($alter_type, $table, $field);
+    function _alter_table($alter_type, $table, $field){}
 
     // --------------------------------------------------------------------
 
@@ -169,7 +169,7 @@ interface OW_Forge_Interface {
      * @param	bool	$create_table
      * @return	array
      */
-     function _process_fields($create_table = FALSE);
+    function _process_fields($create_table = FALSE){}
 
     // --------------------------------------------------------------------
 
@@ -179,7 +179,7 @@ interface OW_Forge_Interface {
      * @param	array	$field
      * @return	string
      */
-     function _process_column($field);
+    function _process_column($field){}
 
     // --------------------------------------------------------------------
 
@@ -191,7 +191,7 @@ interface OW_Forge_Interface {
      * @param	array	&$attributes
      * @return	void
      */
-     function _attr_type(&$attributes);
+    function _attr_type(&$attributes){}
 
     // --------------------------------------------------------------------
 
@@ -211,7 +211,7 @@ interface OW_Forge_Interface {
      * @param	array	&$field
      * @return	void
      */
-     function _attr_unsigned(&$attributes, &$field);
+    function _attr_unsigned(&$attributes, &$field){}
 
     // --------------------------------------------------------------------
 
@@ -222,7 +222,7 @@ interface OW_Forge_Interface {
      * @param	array	&$field
      * @return	void
      */
-     function _attr_default(&$attributes, &$field);
+    function _attr_default(&$attributes, &$field){}
 
     // --------------------------------------------------------------------
 
@@ -233,7 +233,7 @@ interface OW_Forge_Interface {
      * @param	array	&$field
      * @return	void
      */
-     function _attr_unique(&$attributes, &$field);
+    function _attr_unique(&$attributes, &$field){}
 
     // --------------------------------------------------------------------
 
@@ -244,7 +244,7 @@ interface OW_Forge_Interface {
      * @param	array	&$field
      * @return	void
      */
-     function _attr_auto_increment(&$attributes, &$field);
+    function _attr_auto_increment(&$attributes, &$field){}
 
     // --------------------------------------------------------------------
 
@@ -254,7 +254,7 @@ interface OW_Forge_Interface {
      * @param	string	$table	Table name
      * @return	string
      */
-     function _process_primary_keys($table);
+    function _process_primary_keys($table){}
 
     // --------------------------------------------------------------------
 
@@ -264,7 +264,7 @@ interface OW_Forge_Interface {
      * @param	string	$table	Table name
      * @return	string[] list of SQL statements
      */
-     function _process_indexes($table);
+    function _process_indexes($table){}
 
     // --------------------------------------------------------------------
 
@@ -275,5 +275,6 @@ interface OW_Forge_Interface {
      *
      * @return	void
      */
-     function _reset();
+    function _reset(){}
+
 }

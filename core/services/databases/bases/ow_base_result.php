@@ -1,11 +1,17 @@
 <?php
 
-interface OW_Result_Interface {
+/**
+ * Security script access
+ */
+defined('ROOT') OR exit('No direct script access allowed');
+
+class OW_Base_Result implements  OW_Result_Interface {
+
     /**
      * Return the number of Entry for the current request
      *
      */
-     function num_rows();
+    function num_rows(){}
 
     // --------------------------------------------------------------------
 
@@ -15,7 +21,7 @@ interface OW_Result_Interface {
      * @param	string	$type	'object', 'array' or a custom class name
      * @return	array
      */
-     function result($type = 'object');
+    function result($type = 'object'){}
 
     // --------------------------------------------------------------------
 
@@ -25,7 +31,7 @@ interface OW_Result_Interface {
      * @param	string	$class_name
      * @return	array
      */
-     function custom_result_object($class_name);
+    function custom_result_object($class_name){}
 
     // --------------------------------------------------------------------
 
@@ -34,7 +40,7 @@ interface OW_Result_Interface {
      *
      * @return	array
      */
-     function result_object();
+    function result_object(){}
 
     // --------------------------------------------------------------------
 
@@ -43,7 +49,7 @@ interface OW_Result_Interface {
      *
      * @return	array
      */
-     function result_array();
+    function result_array(){}
 
     // --------------------------------------------------------------------
 
@@ -56,7 +62,7 @@ interface OW_Result_Interface {
      * @param	string	$type	'object' or 'array'
      * @return	mixed
      */
-     function row($n = 0, $type = 'object');
+    function row($n = 0, $type = 'object'){}
 
     // --------------------------------------------------------------------
 
@@ -67,7 +73,7 @@ interface OW_Result_Interface {
      * @param	mixed	$value
      * @return	void
      */
-     function set_row($key, $value = NULL);
+    function set_row($key, $value = NULL){}
 
     // --------------------------------------------------------------------
 
@@ -78,7 +84,7 @@ interface OW_Result_Interface {
      * @param	string	$type
      * @return	object
      */
-     function custom_row_object($n, $type);
+    function custom_row_object($n, $type){}
 
     // --------------------------------------------------------------------
 
@@ -88,7 +94,7 @@ interface OW_Result_Interface {
      * @param	int	$n
      * @return	object
      */
-     function row_object($n = 0);
+    function row_object($n = 0){}
 
     // --------------------------------------------------------------------
 
@@ -98,7 +104,7 @@ interface OW_Result_Interface {
      * @param	int	$n
      * @return	array
      */
-     function row_array($n = 0);
+    function row_array($n = 0){}
 
     // --------------------------------------------------------------------
 
@@ -108,7 +114,7 @@ interface OW_Result_Interface {
      * @param	string	$type
      * @return	mixed
      */
-     function first_row($type = 'object');
+    function first_row($type = 'object'){}
 
     // --------------------------------------------------------------------
 
@@ -118,7 +124,7 @@ interface OW_Result_Interface {
      * @param	string	$type
      * @return	mixed
      */
-     function last_row($type = 'object');
+    function last_row($type = 'object'){}
 
     // --------------------------------------------------------------------
 
@@ -128,7 +134,7 @@ interface OW_Result_Interface {
      * @param	string	$type
      * @return	mixed
      */
-     function next_row($type = 'object');
+    function next_row($type = 'object'){}
 
     // --------------------------------------------------------------------
 
@@ -138,7 +144,7 @@ interface OW_Result_Interface {
      * @param	string	$type
      * @return	mixed
      */
-     function previous_row($type = 'object');
+    function previous_row($type = 'object'){}
 
     // --------------------------------------------------------------------
 
@@ -148,7 +154,7 @@ interface OW_Result_Interface {
      * @param	string	$type	'array', 'object' or a custom class name
      * @return	mixed
      */
-     function unbuffered_row($type = 'object');
+    function unbuffered_row($type = 'object'){}
 
     // --------------------------------------------------------------------
 
@@ -171,7 +177,7 @@ interface OW_Result_Interface {
      *
      * @return	int
      */
-     function num_fields();
+    function num_fields(){}
 
     // --------------------------------------------------------------------
 
@@ -184,7 +190,7 @@ interface OW_Result_Interface {
      *
      * @return	array
      */
-     function list_fields();
+    function list_fields(){}
 
     // --------------------------------------------------------------------
 
@@ -197,7 +203,7 @@ interface OW_Result_Interface {
      *
      * @return	array
      */
-     function field_data();
+    function field_data(){}
 
     // --------------------------------------------------------------------
 
@@ -208,7 +214,7 @@ interface OW_Result_Interface {
      *
      * @return	void
      */
-     function free_result();
+    function free_result(){}
 
     // --------------------------------------------------------------------
 
@@ -224,7 +230,7 @@ interface OW_Result_Interface {
      * @param	int	$n
      * @return	bool
      */
-     function data_seek($n = 0);
+    function data_seek($n = 0){}
 
     // --------------------------------------------------------------------
 
@@ -237,7 +243,7 @@ interface OW_Result_Interface {
      *
      * @return	array
      */
-     function _fetch_assoc();
+    function _fetch_assoc(){}
 
     // --------------------------------------------------------------------
 
@@ -251,6 +257,6 @@ interface OW_Result_Interface {
      * @param	string	$class_name
      * @return	object
      */
-     function _fetch_object($class_name = 'stdClass');
-    
+    function _fetch_object($class_name = 'stdClass'){}
+
 }

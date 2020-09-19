@@ -106,9 +106,18 @@ function __autoload($class)
      * Check if the class was effective loaded
      */
 
-    if ( !class_exists($class) ) {
+    if ( !class_exists($class) && !interface_exists($class)) {
 
-        debug("A file for the class ".ucwords($class)." Exist but dont' have a definition.");
+        if (str_ends_with($class, "Interface")) {
+
+            debug("A file for the Interface ".ucwords($class)." Exist but dont' have a definition.");
+
+        } else {
+
+            debug("A file for the class ".ucwords($class)." Exist but dont' have a definition.");
+
+        }
+
         die();
 
     }

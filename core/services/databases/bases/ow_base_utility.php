@@ -1,12 +1,17 @@
 <?php
 
-interface OW_Utility_Interface {
+/**
+ * Security script access
+ */
+defined('ROOT') OR exit('No direct script access allowed');
+
+class OW_Base_Utility implements  OW_Utility_Interface {
 
     /**
      * Return the list of existing databases
      * @return mixed
      */
-     function list_databases();
+    function list_databases(){}
 
     // --------------------------------------------------------------------
 
@@ -16,7 +21,7 @@ interface OW_Utility_Interface {
      * @param	string	$database_name
      * @return	bool
      */
-     function database_exists($database_name);
+    function database_exists($database_name){}
 
     // --------------------------------------------------------------------
 
@@ -26,7 +31,7 @@ interface OW_Utility_Interface {
      * @param	string	$table_name
      * @return	mixed
      */
-     function optimize_table($table_name);
+    function optimize_table($table_name){}
 
     // --------------------------------------------------------------------
 
@@ -35,7 +40,7 @@ interface OW_Utility_Interface {
      *
      * @return	mixed
      */
-     function optimize_database();
+    function optimize_database(){}
 
     // --------------------------------------------------------------------
 
@@ -45,7 +50,7 @@ interface OW_Utility_Interface {
      * @param	string	$table_name
      * @return	mixed
      */
-     function repair_table($table_name);
+    function repair_table($table_name){}
 
     // --------------------------------------------------------------------
 
@@ -58,7 +63,7 @@ interface OW_Utility_Interface {
      * @param	string	$enclosure	Enclosure (default: ")
      * @return	string
      */
-     function csv_from_result($query, $delim = ',', $newline = "\n", $enclosure = '"');
+    function csv_from_result($query, $delim = ',', $newline = "\n", $enclosure = '"'){}
 
     // --------------------------------------------------------------------
 
@@ -69,7 +74,7 @@ interface OW_Utility_Interface {
      * @param	array	$params	Any preferences
      * @return	string
      */
-     function xml_from_result($query, $params = array());
+    function xml_from_result($query, $params = array()){}
 
     // --------------------------------------------------------------------
 
@@ -79,6 +84,6 @@ interface OW_Utility_Interface {
      * @param	array	$params
      * @return	string
      */
-     function backup($params = array());
-    
+    function backup($params = array()){}
+
 }
