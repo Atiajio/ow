@@ -15,7 +15,7 @@
 13- integrer tous les systemes de payement
 14- intrgrer le systeme des observeurs pour le control des erreurs
 15- penser a regarder le cours de openclassroom sur les elements du design pattern et controller notre code avec
-
+16- penser a gerer PDO pour les drivers de databases (aller juste sur code igniter DB.php et voir a la fin comment il charge les subdrivers)
 
 Details pour la console
     0- Structure
