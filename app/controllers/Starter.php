@@ -9,7 +9,6 @@ class Starter extends OW_Controller{
 
     public function index(){
 
-        $this->model("User")->read("vermont");
 
         $this->respond();
     }

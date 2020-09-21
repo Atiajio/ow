@@ -21,7 +21,7 @@ defined('ROOT') OR exit('No direct script access allowed');
                'hostname' => 'localhost',
                'username' => 'root',
                'password' => '',
-               'database' => 'stock',
+               'database' => 'blog',
                'dbdriver' => 'mysqli',
                'dbprefix' => '',
                'pconnect' => FALSE,
@@ -64,13 +64,13 @@ defined('ROOT') OR exit('No direct script access allowed');
 
         OW_DB::initialize($db);
 
-        $query = OW_DB::$db->query('SELECT name, title, email FROM my_table');
+        $query = OW_DB::$db->query('SELECT name, email, password FROM user');
 
         foreach ($query->result_array() as $row)
         {
-            echo $row['title'] . "<br>";
             echo $row['name'] . "<br>";
             echo $row['email'] . "<br>";
+            echo $row['password'] . "<br>";
         }
 
         /**
