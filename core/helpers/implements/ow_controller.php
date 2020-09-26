@@ -11,7 +11,6 @@ class OW_Controller extends OW_Base_Controller{
         /**
          * Generating the responce depending on the type of the UI used
          */
-
         $this->response->setContentSent(true);
 
     }

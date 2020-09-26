@@ -13,84 +13,90 @@ interface OW_Model_Interface  {
 
     /**
      * Retourne les type d'Associations dans le systeme
-     * @return mixed
+     * @return array
      */
-    public static function associations();
+    public static function associations(): array;
 
     /**
      * @param $attr_name
      * @return mixed
      */
-    public function get($attr_name);
+    public function get($attr_name): mixed;
+
+    /**
+     * @param string $attr_name
+     * @param mixed $attr_new_value
+     * @return mixed
+     */
+    public function set(string $attr_name, mixed $attr_new_value);
+
+    /**
+     * @param string $attr_name
+     * @return mixed
+     */
+    public function has(string $attr_name);
+
+    /**
+     * @param string $attr_name
+     * @return mixed
+     */
+    public function isEmpty(string $attr_name);
+
+    /**
+     * @param string $attr_name
+     * @return mixed
+     */
+    public function hasValue(string $attr_name);
+
+    /**
+     * @return bool
+     */
+    public function hasErrors():bool;
 
     /**
      *
-     * @param $attr_name
-     * @param $attr_new_value
+     * @return mixed
      */
-    public function set($attr_name, $attr_new_value);
+    public function getErrors():array;
 
     /**
-     * @param $attr_name
-     * @return bool
+     * @param string $attr_name
+     * @param array $errors
+     * @return mixed
      */
-    public function has($attr_name);
+    public function setError(string $attr_name, array $errors);
 
     /**
-     * @param $attr_name
-     * @return bool
+     * @param array $errors
+     * @return mixed
      */
-    public function isEmpty($attr_name);
+    public function setErrors(array $errors);
 
     /**
-     * @param $attr_name
-     * @return bool
+     * @param int $attr_id
+     * @return OW_Model
      */
-    public function hasValue($attr_name);
+    public function findById(int $attr_id):OW_Model;
 
     /**
-     * @return array
-     */
-    public function hasErrors();
-    /**
-     * @return array
-     */
-    public function getErrors();
-
-    /**
-     * @param $attr_name
-     * @param $errors
-     */
-    public function setError($attr_name, $errors);
-
-    /**
-     * @param $errors
-     */
-    public function setErrors($errors);
-
-    /**
-     * @param $attr_id
-     * @return array
-     */
-    public function findById($attr_id);
-
-    /**
-     *  chaque table gace aux migrations auront des colonnes deleted, created_at, et modified_at
+     *
+     * chaque table gace aux migrations auront des colonnes deleted, created_at, et modified_at
      * en mode soft delete, on met juste deleted a true
+     *
+     * @param array $where
+     * @return bool
      */
-    public function softDelete();
+    public function softDelete(array $where): bool;
 
     /**
      * Converti l'object en cour en array et retourne
+     *
+     * @return array
      */
-    public function toArray();
+    public function toArray():array;
 
     /**
      *
-     */
-    public function setVirtual();
-
-    /**
      * List of options
      *
      * conditions provide conditions for the WHERE clause of your query.
@@ -114,10 +120,12 @@ interface OW_Model_Interface  {
      *
      * https://book.cakephp.org/3/en/orm/retrieving-data-and-resultsets.html
      *
-     * @param $type
+     *
+     * @param string $type
      * @param array $options
+     * @return array
      */
-    public function find($type, $options = []);
+    public function find(string $type, array $options = []): array;
 
     /**
      * Ecris les informations necessaires a la creation d'un nouvel objet dans la base de données
@@ -126,40 +134,39 @@ interface OW_Model_Interface  {
      * @param array $options_non_echappees
      * @return bool
      */
-    public function create($options_echappees = array(), $options_non_echappees = array());
+    public function create(array $options_echappees = array(), array $options_non_echappees = array()): bool;
 
     /**
      * Function qui permet de faire un update sur une ou plusieurs colonnes du model
      *
-     * @param $where
+     * @param array $where
      * @param array $options_echappees
      * @param array $options_non_echappees
      * @return bool
      */
-    public function update($where, $options_echappees = array(), $options_non_echappees = array());
+    public function update(array $where, array $options_echappees = array(), array $options_non_echappees = array()): bool;
 
     /**
      * Function pour supprimer une ou plusieurs colonnes dans la base de données
      *
-     * @param $where
+     * @param array $where
      * @return bool
      */
-    public function delete($where);
+    public function delete(array $where): bool;
 
     /**
-     * Counter des elements de la table d'un model
+     *  Counter des elements de la table d'un model
      *
      * @param array $where
      * @return int
      */
-    public function count($where = array());
+    public function count(array $where = array()):int;
 
     /**
      * Function qui permet de convertir le resultat d'une requete : passage de l'acces pas array[0][elt] à array[elt]
      *
-     * @param $object
-     * @param bool $one
-     * @return mixed
+     * @param array $object
+     * @return array
      */
-     function convert($object, $one = false);
+     function convert(array $object): array;
 }

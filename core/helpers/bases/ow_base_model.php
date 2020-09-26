@@ -10,14 +10,15 @@ class OW_Base_Model extends OW_Object implements OW_Model_Interface {
     /**
      * @var array
      */
-    protected static  $associations =  array('belongsTo', 'hasOne', 'hasMany', 'hasAndBelongsToMany');
+    protected static array $associations =  array('belongsTo', 'hasOne', 'hasMany', 'hasAndBelongsToMany');
 
 
     /**
      * Retourne les type d'Associations dans le systeme
      * @return mixed
      */
-    public static function associations(){
+    public static function associations(): array
+    {
 
         return self::$associations;
 
@@ -27,133 +28,139 @@ class OW_Base_Model extends OW_Object implements OW_Model_Interface {
      * @param $attr_name
      * @return mixed
      */
-    public function get($attr_name)
+    public function get($attr_name): mixed
     {
         // TODO: Implement get() method.
     }
 
     /**
-     *
-     * @param $attr_name
-     * @param $attr_new_value
+     * @param string $attr_name
+     * @param mixed $attr_new_value
+     * @return mixed
      */
-    public function set($attr_name, $attr_new_value)
+    public function set(string $attr_name, $attr_new_value)
     {
         // TODO: Implement set() method.
     }
 
     /**
-     * @param $attr_name
-     * @return bool
+     * @param string $attr_name
+     * @return mixed
      */
-    public function has($attr_name)
+    public function has(string $attr_name)
     {
         // TODO: Implement has() method.
     }
 
     /**
-     * @param $attr_name
-     * @return bool
+     * @param string $attr_name
+     * @return mixed
      */
-    public function isEmpty($attr_name)
+    public function isEmpty(string $attr_name)
     {
         // TODO: Implement isEmpty() method.
     }
 
     /**
-     * @param $attr_name
-     * @return bool
+     * @param string $attr_name
+     * @return mixed
      */
-    public function hasValue($attr_name)
+    public function hasValue(string $attr_name)
     {
         // TODO: Implement hasValue() method.
     }
 
     /**
-     * @return array
+     * @return bool
      */
-    public function hasErrors()
+    public function hasErrors(): bool
     {
         // TODO: Implement hasErrors() method.
     }
 
     /**
-     * @return array
+     *
+     * @return mixed
      */
-    public function getErrors()
+    public function getErrors(): array
     {
         // TODO: Implement getErrors() method.
     }
 
     /**
-     * @param $attr_name
-     * @param $errors
+     * @param string $attr_name
+     * @param array $errors
+     * @return mixed
      */
-    public function setError($attr_name, $errors)
+    public function setError(string $attr_name, array $errors)
     {
         // TODO: Implement setError() method.
     }
 
     /**
-     * @param $errors
+     * @param array $errors
+     * @return mixed
      */
-    public function setErrors($errors)
+    public function setErrors(array $errors)
     {
         // TODO: Implement setErrors() method.
     }
 
     /**
-     * @param $attr_id
-     * @return array
+     * @param int $attr_id
+     * @return OW_Model
      */
-    public function findById($attr_id)
+    public function findById(int $attr_id): OW_Model
     {
         // TODO: Implement findById() method.
     }
 
     /**
-     *  chaque table gace aux migrations auront des colonnes deleted, created_at, et modified_at
+     *
+     * chaque table gace aux migrations auront des colonnes deleted, created_at, et modified_at
      * en mode soft delete, on met juste deleted a true
+     *
+     * @param array $where
+     * @return bool
      */
-    public function softDelete()
+    public function softDelete(array $where): bool
     {
         // TODO: Implement softDelete() method.
     }
 
     /**
      * Converti l'object en cour en array et retourne
+     *
+     * @return array
      */
-    public function toArray()
+    public function toArray(): array
     {
         // TODO: Implement toArray() method.
     }
 
     /**
      *
+     * List of options
+     *
+     * conditions provide conditions for the WHERE clause of your query.
+     *limit* Set the number of rows you want.
+     *offset* Set the page offset you want. You can also use page to make the calculation simpler.
+     *contain define the associations to eager load.
+     *fields limit the fields loaded into the entity. Only loading some fields can cause entities to behave incorrectly.
+     *group add a GROUP BY clause to your query. This is useful when using aggregating functions.
+     *having add a HAVING clause to your query.
+     * join define additional custom joins.
+     * order order the result set.
+     *
+     *
+     * https://book.cakephp.org/3/en/orm/retrieving-data-and-resultsets.html
+     *
+     *
+     * @param string $type
+     * @param array $options
+     * @return array
      */
-    public function setVirtual()
-    {
-        // TODO: Implement setVirtual() method.
-    }/**
- * List of options
- *
- * conditions provide conditions for the WHERE clause of your query.
- *limit* Set the number of rows you want.
- *offset* Set the page offset you want. You can also use page to make the calculation simpler.
- *contain define the associations to eager load.
- *fields limit the fields loaded into the entity. Only loading some fields can cause entities to behave incorrectly.
- *group add a GROUP BY clause to your query. This is useful when using aggregating functions.
- *having add a HAVING clause to your query.
- * join define additional custom joins.
- * order order the result set.
- *
- *
- * https://book.cakephp.org/3/en/orm/retrieving-data-and-resultsets.html
- *
- * @param $type
- * @param array $options
- */
-    public function find($type, $options = [])
+    public function find(string $type, array $options = []): array
     {
         // TODO: Implement find() method.
     }
@@ -165,7 +172,7 @@ class OW_Base_Model extends OW_Object implements OW_Model_Interface {
      * @param array $options_non_echappees
      * @return bool
      */
-    public function create($options_echappees = array(), $options_non_echappees = array())
+    public function create(array $options_echappees = array(), array $options_non_echappees = array()): bool
     {
         // TODO: Implement create() method.
     }
@@ -173,12 +180,12 @@ class OW_Base_Model extends OW_Object implements OW_Model_Interface {
     /**
      * Function qui permet de faire un update sur une ou plusieurs colonnes du model
      *
-     * @param $where
+     * @param array $where
      * @param array $options_echappees
      * @param array $options_non_echappees
      * @return bool
      */
-    public function update($where, $options_echappees = array(), $options_non_echappees = array())
+    public function update(array $where, array $options_echappees = array(), array $options_non_echappees = array()): bool
     {
         // TODO: Implement update() method.
     }
@@ -186,21 +193,21 @@ class OW_Base_Model extends OW_Object implements OW_Model_Interface {
     /**
      * Function pour supprimer une ou plusieurs colonnes dans la base de données
      *
-     * @param $where
+     * @param array $where
      * @return bool
      */
-    public function delete($where)
+    public function delete(array $where): bool
     {
         // TODO: Implement delete() method.
     }
 
     /**
-     * Counter des elements de la table d'un model
+     *  Counter des elements de la table d'un model
      *
      * @param array $where
      * @return int
      */
-    public function count($where = array())
+    public function count(array $where = array()): int
     {
         // TODO: Implement count() method.
     }
@@ -208,11 +215,10 @@ class OW_Base_Model extends OW_Object implements OW_Model_Interface {
     /**
      * Function qui permet de convertir le resultat d'une requete : passage de l'acces pas array[0][elt] à array[elt]
      *
-     * @param $object
-     * @param bool $one
-     * @return mixed
+     * @param array $object
+     * @return array
      */
-    function convert($object, $one = false)
+    function convert(array $object): array
     {
         // TODO: Implement convert() method.
     }

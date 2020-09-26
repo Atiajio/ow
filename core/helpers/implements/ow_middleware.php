@@ -7,7 +7,7 @@ defined('ROOT') OR exit('No direct script access allowed');
 
 class OW_Middleware extends OW_Base_Middleware{
 
-    public function run(OW_Request $request, OW_Response $response, $next)
+    public function run(OW_Request $request, OW_Response $response, mixed $next) : OW_Response
     {
         // Actions sur la requette avant l'envoit au controller
         // ici ...

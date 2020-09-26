@@ -7,47 +7,47 @@ defined('ROOT') OR exit('No direct script access allowed');
 
 class OW_Base_Controller extends OW_Object implements OW_Controller_Interface {
     
-    public $request;
-    public $response;
+    public OW_Request $request;
+    public OW_Response $response;
 
     /**
-     * @return mixed
+     * @return OW_Request
      */
-    public function getRequest()
+    public function getRequest(): OW_Request
     {
         return $this->request;
 
     }
 
     /**
-     * @param mixed $request
+     * @param OW_Request $request
      */
-    public function setRequest($request)
+    public function setRequest(OW_Request $request)
     {
         $this->request = $request;
     }
 
     /**
-     * @return mixed
+     * @return OW_Response
      */
-    public function getResponse()
+    public function getResponse(): OW_Response
     {
         return $this->response;
     }
 
     /**
-     * @param mixed $response
+     * @param OW_Response $response
      */
-    public function setResponse($response)
+    public function setResponse(OW_Response $response)
     {
         $this->response = $response;
     }
 
     /**
-     * @param $model_name
-     * @return mixed
+     * @param string $model_name
+     * @return OW_Model
      */
-    public function model ($model_name)
+    public function model (string $model_name):OW_Model
     {
         if (ow_file_for_class_definition_exist($model_name)) {
 
