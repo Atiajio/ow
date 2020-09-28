@@ -7,80 +7,64 @@ defined('ROOT') OR exit('No direct script access allowed');
 
 class OW_DB {
 
-    public static $db;
-    public static $forge;
-    public static $all_db;
+    private static OW_Base_Db_Driver $active_db;
+    private static OW_Base_Db_Forge $forge;
+    private static OW_Base_Db_Utility $utility;
 
-    /**
-     * Initialize all databases
-     *
-     * $param = array(
-        0 => array(
-     *      'database_name' => "database",
-     *      ...
-     * ),
-     *  ...
-     * );
-     *
-     * @param array $params
-     */
-    public function initialize(array $params){
 
-        self::$all_db = $params;
-
+    public static function initialize(array $db_config){
         /**
          * initialisation de la premiere base de données comme celle par defaut.
          */
-        self::$db = OW_Base_Db::DB($params[0]);
+        self::$active_db = OW_Base_Db::DB($db_config);
     }
 
     /**
-     * @return mixed
+     * @return OW_Base_Db_Driver
      */
-    public static function getDb()
+    public static function getActiveDb(): OW_Base_Db_Driver
     {
-        return self::$db;
-
+        return self::$active_db;
     }
 
     /**
-     * @param mixed $db
+     * @param OW_Base_Db_Driver $active_db
      */
-    public static function setDb($db)
+    public static function setActiveDb(OW_Base_Db_Driver $active_db): void
     {
-        self::$db = $db;
+        self::$active_db = $active_db;
     }
 
     /**
-     * @return mixed
+     * @return OW_Base_Db_Forge
      */
-    public static function getForge()
+    public static function getForge(): OW_Base_Db_Forge
     {
         return self::$forge;
     }
 
     /**
-     * @param mixed $forge
+     * @param OW_Base_Db_Forge $forge
      */
-    public static function setForge($forge)
+    public static function setForge(OW_Base_Db_Forge $forge): void
     {
         self::$forge = $forge;
     }
 
     /**
-     * @return mixed
+     * @return OW_Base_Db_Utility
      */
-    public static function getAllDb()
+    public static function getUtility(): OW_Base_Db_Utility
     {
-        return self::$all_db;
+        return self::$utility;
     }
 
     /**
-     * @param mixed $all_db
+     * @param OW_Base_Db_Utility $utility
      */
-    public static function setAllDb($all_db)
+    public static function setUtility(OW_Base_Db_Utility $utility): void
     {
-        self::$all_db = $all_db;
+        self::$utility = $utility;
     }
 
 

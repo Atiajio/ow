@@ -14,65 +14,108 @@ defined('ROOT') OR exit('No direct script access allowed');
     /**
      * Variables globales du systeme
      */
+
     /**
      * Public 
      */
-    public static $Request = null;
-    public static $Response = null;
-    public static $DB = array();
+
+    public static OW_Request $Request;
+    public static OW_Response $Response;
+    public static OW_Base_Db_Driver $db;
+    public static OW_Base_Db_Driver $tmp_db;
 
     /**
-     * Private
-     */
-    private static $Routes = array();
+      * Private
+      */
+
+    private static array $databases = array();
+    private static array $middleware = array();
+    private static int $middleware_analysed = -1;
+    private static bool $middleware_analysing_incoming_request = true;
+    private static string $Default_controller = "Starter";
+    private static string $Default_method = "index";
 
 
-    public static $Middlewares = array();
-    private static $middleware_analysed = -1;
-    private static $middleware_analysing_incoming_request = true;
-    private static $Default_controller = "Starter";
-    private static $Default_method = "index";
-
-
-    /**
-     * Fonction d'enregistrement des middlewares
-     */
-    public static function register_middleware(OW_Middleware $new_middleware){
+     /**
+      * Fonction d'enregistrement des middlewares
+      *
+      * @param OW_Middleware $new_middleware
+      */
+    public static function register_middleware(OW_Middleware $new_middleware)
+    {
         
-        self::$Middlewares[] = $new_middleware;
+        self::$middleware[] = $new_middleware;
 
     }
+
+     /**
+      * Fonction d'enregistrement des middlewares
+      *
+      * @param array $db_config
+      */
+     public static function register_db(array $db_config)
+     {
+
+         self::$databases[] = $db_config;
+
+     }
+
+     /**
+      * @param int $index
+      */
+     public static function init_db(int $index)
+     {
+        if (isset(self::$databases[$index])) {
+
+            OW_DB::initialize(self::$databases[$index]);
+            self::$db = OW_DB::getActiveDb();
+
+        } else {
+
+            if (!empty(self::$databases)) {
+
+                debug("Index database does not exist ! ", true);
+
+            }
+
+        }
+     }
+
+     /**
+      * @param int $index
+      */
+     public static function init_tmp_db(int $index)
+     {
+         if (isset(self::$databases[$index])) {
+
+             OW_DB::initialize(self::$databases[$index]);
+             self::$tmp_db = OW_DB::getActiveDb();
+
+         } else {
+
+             debug("Index database does not exist ! ", true);
+
+         }
+     }
 
     /**
      * Fonction de lancement des middlewares
      */
-    public static function launch_middlewares(){
+    public static function launch_middleware(){
 
-        // Controlle de l'existance de la requete
+        /**
+         * Controlle de l'existance de la requete
+         */
+        OW_System::$Request = new OW_Request();
 
-        if (is_null(OW_System::$Request)) {
-
-            OW_System::$Request = new OW_Request();
-
-        }
-
-        // Controlle de l'existance de la reponse
+        /**
+         * Controlle de l'existance de la reponse
+         */
         
-        if (is_null(OW_System::$Response)) {
+        OW_System::$Response = new OW_Response(OW_System::$Request);
 
-            OW_System::$Response = new OW_Response(OW_System::$Request);
-
-        }
-       
         return OW_System::next(OW_System::$Request, OW_System::$Response, "OW_System::next");
 
-    }
-
-    /**
-     * Fonction d'enregistrement des routes
-     */
-    public static function register_route(){
-        debug("Register Route");
     }
 
      /**
@@ -88,6 +131,8 @@ defined('ROOT') OR exit('No direct script access allowed');
 
      /**
       * Fonction permettant de retouner  default controller
+      *
+      * @return string
       */
      public static function get_default_controller(){
 
@@ -108,6 +153,8 @@ defined('ROOT') OR exit('No direct script access allowed');
 
      /**
       * Fonction permettant de retouner  la default method
+      *
+      * @return string
       */
      public static function get_default_method(){
 
@@ -115,20 +162,26 @@ defined('ROOT') OR exit('No direct script access allowed');
 
      }
 
-    /**
-     * Fonction qui execute de maniere recursive les middlewares
-     */
+     /**
+      *
+      * Fonction qui execute de maniere recursive les middlewares
+      *
+      * @param OW_Request $request
+      * @param OW_Response $response
+      * @param $next
+      * @return OW_Response
+      */
     public static function next (OW_Request $request, OW_Response $response, $next) {
         
         if (OW_System::$middleware_analysing_incoming_request == true) {
 
             // Middleware sur les requetes entrantes
-            if (OW_System::$middleware_analysed < sizeof(OW_System::$Middlewares)-1 ) {
+            if (OW_System::$middleware_analysed < sizeof(OW_System::$middleware)-1 ) {
                 
                 // on prend le middleware suivant, sachant qu on commence a -1 pour eviter les bugs
                 OW_System::$middleware_analysed++;
 
-                return OW_System::$Middlewares[OW_System::$middleware_analysed]->run($request, $response, $next);
+                return OW_System::$middleware[OW_System::$middleware_analysed]->run($request, $response, $next);
 
             } else {
 
@@ -165,17 +218,148 @@ defined('ROOT') OR exit('No direct script access allowed');
                             /**
                              * inteligent managing
                              */
+                            debug("Method '" . $method . "' not found in Controller '" . OW_System::$Request->getAttributes()['controller'] . "' (inteligent managing)");
                         }
                     }
 
                 }
 
-
-                // retour de la reponse
-                // ici il va falloir retourner la vrai reponse du controller et ce que je suis entrain de faire la
-                return $response;
+                /**
+                 * Retour de la reponse du controller
+                 */
+                return $controller->getResponse();
             }
         } 
     }
+
+     /**
+      * @return OW_Request
+      */
+     public static function getRequest(): OW_Request
+     {
+         return self::$Request;
+     }
+
+     /**
+      * @param OW_Request $Request
+      */
+     public static function setRequest(OW_Request $Request): void
+     {
+         self::$Request = $Request;
+     }
+
+     /**
+      * @return OW_Response
+      */
+     public static function getResponse(): OW_Response
+     {
+         return self::$Response;
+     }
+
+     /**
+      * @param OW_Response $Response
+      */
+     public static function setResponse(OW_Response $Response): void
+     {
+         self::$Response = $Response;
+     }
+
+     /**
+      * @return OW_Base_Db_Driver
+      */
+     public static function getDb(): OW_Base_Db_Driver
+     {
+         return self::$db;
+     }
+
+     /**
+      * @param OW_Base_Db_Driver $db
+      */
+     public static function setDb(OW_Base_Db_Driver $db): void
+     {
+         self::$db = $db;
+     }
+
+     /**
+      * @return OW_Base_Db_Driver
+      */
+     public static function getTmpDb(): OW_Base_Db_Driver
+     {
+         return self::$tmp_db;
+     }
+
+     /**
+      * @param OW_Base_Db_Driver $tmp_db
+      */
+     public static function setTmpDb(OW_Base_Db_Driver $tmp_db): void
+     {
+         self::$tmp_db = $tmp_db;
+     }
+
+     /**
+      * @return array
+      */
+     public static function getDatabases(): array
+     {
+         return self::$databases;
+     }
+
+     /**
+      * @param array $databases
+      */
+     public static function setDatabases(array $databases): void
+     {
+         self::$databases = $databases;
+     }
+
+     /**
+      * @return array
+      */
+     public static function getMiddleware(): array
+     {
+         return self::$middleware;
+     }
+
+     /**
+      * @param array $middleware
+      */
+     public static function setMiddleware(array $middleware): void
+     {
+         self::$middleware = $middleware;
+     }
+
+     /**
+      * @return int
+      */
+     public static function getMiddlewareAnalysed(): int
+     {
+         return self::$middleware_analysed;
+     }
+
+     /**
+      * @param int $middleware_analysed
+      */
+     public static function setMiddlewareAnalysed(int $middleware_analysed): void
+     {
+         self::$middleware_analysed = $middleware_analysed;
+     }
+
+     /**
+      * @return bool
+      */
+     public static function isMiddlewareAnalysingIncomingRequest(): bool
+     {
+         return self::$middleware_analysing_incoming_request;
+     }
+
+     /**
+      * @param bool $middleware_analysing_incoming_request
+      */
+     public static function setMiddlewareAnalysingIncomingRequest(bool $middleware_analysing_incoming_request): void
+     {
+         self::$middleware_analysing_incoming_request = $middleware_analysing_incoming_request;
+     }
+
+
 
  }

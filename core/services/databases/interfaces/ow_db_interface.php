@@ -11,6 +11,12 @@ defined('ROOT') OR exit('No direct script access allowed');
 
 interface OW_Db_Interface  {
 
-    public static  function &DB($params = '');
+    /**
+     * Retourne un driver sur la BD
+     *
+     * @param string $params
+     * @return mixed
+     */
+    public static  function DB($params = '');
 
 }

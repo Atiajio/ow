@@ -15,68 +15,15 @@ defined('ROOT') OR exit('No direct script access allowed');
      */
     public static function run(){
 
-        $db = array(
-           0 => array(
-               'dsn'	=> '',
-               'hostname' => 'localhost',
-               'username' => 'root',
-               'password' => '',
-               'database' => 'blog',
-               'dbdriver' => 'mysqli',
-               'dbprefix' => '',
-               'pconnect' => FALSE,
-               'db_debug' => (SYSTEM_MODE !== 'PROD'),
-               'cache_on' => FALSE,
-               'cachedir' => '',
-               'char_set' => 'utf8',
-               'dbcollat' => 'utf8_general_ci',
-               'swap_pre' => '',
-               'encrypt' => FALSE,
-               'compress' => FALSE,
-               'stricton' => FALSE,
-               'failover' => array(),
-               'save_queries' => TRUE
-           ),
-
-        1=> array(
-            'dsn'	=> '',
-            'hostname' => 'localhost',
-            'username' => 'root',
-            'password' => '',
-            'database' => 'blog',
-            'dbdriver' => 'mysqli',
-            'dbprefix' => '',
-            'pconnect' => FALSE,
-            'db_debug' => (SYSTEM_MODE !== 'PROD'),
-            'cache_on' => FALSE,
-            'cachedir' => '',
-            'char_set' => 'utf8',
-            'dbcollat' => 'utf8_general_ci',
-            'swap_pre' => '',
-            'encrypt' => FALSE,
-            'compress' => FALSE,
-            'stricton' => FALSE,
-            'failover' => array(),
-            'save_queries' => TRUE
-        )
-
-        );
-
-        OW_DB::initialize($db);
-
-        $query = OW_DB::$db->query('SELECT name, email, password FROM user');
-
-        foreach ($query->result_array() as $row)
-        {
-            echo $row['name'] . "<br>";
-            echo $row['email'] . "<br>";
-            echo $row['password'] . "<br>";
-        }
+        /**
+         * Connexion a la base de données
+         */
+        OW_System::init_db(0);
 
         /**
          * Demarage des middlewares
          */
-        $response = OW_System::launch_middlewares();
+        $response = OW_System::launch_middleware();
 
         if ($response->isContentSent()) {
             /**
@@ -91,13 +38,6 @@ defined('ROOT') OR exit('No direct script access allowed');
             /**
              * CAS QUASAR
              */
-
-            /**
-             * Normale framework case
-             */
-
-
-            //debug("Resquest was created and managed !!! ");
 
         } else {
 
