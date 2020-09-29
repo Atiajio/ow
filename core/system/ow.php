@@ -23,9 +23,14 @@ defined('ROOT') OR exit('No direct script access allowed');
         /**
          * Demarage des middlewares
          */
-        $response = OW_System::launch_middleware();
 
-        if ($response->isContentSent()) {
+        /**
+         * Si la requete est en mode Ajax on lance les middelwares et toute la suite
+         * sinon on retourne juste la page template
+         */
+
+        if(true){
+
             /**
              * Retrour de la reponse en fonction du mode UI installé
              */
@@ -33,17 +38,35 @@ defined('ROOT') OR exit('No direct script access allowed');
             /**
              * Cas REACT
              */
+            ob_start();
 
+            require_once(ROOT . DS . 'core' . DS . 'helpers' . DS .'default_view.php' );
+
+            return ob_flush();
 
             /**
              * CAS QUASAR
              */
 
+
         } else {
 
-            debug('The Controller mus call the function respond() LIKE  $this->respond(); at the end of the controller function. ');
+            $response = OW_System::launch_middleware();
+
+            if ($response->isContentSent()) {
+
+                /**
+                 * Retour de la reponse json
+                 */
+
+            } else {
+
+                debug('The Controller mus call the function respond() LIKE  $this->respond(); at the end of the controller function. ');
+
+            }
 
         }
+
     }
 
  }

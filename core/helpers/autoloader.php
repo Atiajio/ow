@@ -61,8 +61,8 @@ function __autoload($class)
 
             if (SYSTEM_MODE == 'DEV') {
 
-                debug("Enable to load the class : " . $class. " In Core ");
-                die();
+               // debug("Enable to load the class : " . $class. " In Core ");
+                //die();
 
 
             } else {
@@ -87,8 +87,8 @@ function __autoload($class)
 
             if (SYSTEM_MODE == 'DEV') {
 
-                debug("Enable to load the class : " . $class . " In App ");
-                die();
+                //debug("Enable to load the class : " . $class . " In App ");
+                //die();
 
             } else {
 
@@ -110,15 +110,15 @@ function __autoload($class)
 
         if (str_ends_with($class, "Interface")) {
 
-            debug("A file for the Interface ".ucwords($class)." Exist but dont' have a definition.");
+            //debug("A file for the Interface ".ucwords($class)." Exist but dont' have a definition.");
 
         } else {
 
-            debug("A file for the class ".ucwords($class)." Exist but dont' have a definition.");
+            //debug("A file for the class ".ucwords($class)." Exist but dont' have a definition.");
 
         }
 
-        die();
+        //die();
 
     }
 }

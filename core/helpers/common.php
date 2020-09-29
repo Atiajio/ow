@@ -84,3 +84,15 @@ function str_containt($haystack, $needle)
 
     }
  }
+
+/**
+ * Return the path from base url to specification
+ *
+ * @param string $path
+ * @return bool
+ */
+function base_url(string $path  = "")
+{
+
+    return rtrim(OW_System::getBaseUrl(), '/'). "/" . ltrim($path, '/');
+}

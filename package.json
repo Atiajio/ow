@@ -1,0 +1,36 @@
+{
+  "name": "ow",
+  "version": "1.0.0",
+  "description": "OW Framework ",
+  "main": "index.js",
+  "scripts": {
+    "dev": "webpack --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "watch": "webpack --watch --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "prod": "webpack --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Atiajio/ow.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Atiajio/ow/issues"
+  },
+  "homepage": "https://github.com/Atiajio/ow#readme",
+  "dependencies": {
+    "@material-ui/core": "^4.11.0",
+    "@material-ui/icons": "^4.9.1",
+    "laravel-mix": "^5.0.5",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-router-dom": "^5.2.0",
+    "webpack": "^4.44.2"
+  },
+  "devDependencies": {
+    "@babel/preset-react": "^7.10.4",
+    "resolve-url-loader": "^3.1.0",
+    "sass": "^1.26.11",
+    "sass-loader": "^8.0.2"
+  }
+}

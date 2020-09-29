@@ -11,6 +11,7 @@ defined('ROOT') OR exit('No direct script access allowed');
  *  base_url
  */
 
+OW_System::register_base_url("http://localhost/ow");
 
 /**
  * System View type Configuration

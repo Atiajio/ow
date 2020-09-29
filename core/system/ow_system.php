@@ -34,6 +34,7 @@ defined('ROOT') OR exit('No direct script access allowed');
     private static bool $middleware_analysing_incoming_request = true;
     private static string $Default_controller = "Starter";
     private static string $Default_method = "index";
+    private static string $base_url = "http://localhost/ow";
 
 
      /**
@@ -57,6 +58,13 @@ defined('ROOT') OR exit('No direct script access allowed');
      {
 
          self::$databases[] = $db_config;
+
+     }
+
+     public static function register_base_url(string $url)
+     {
+
+         self::$base_url = $url;
 
      }
 
@@ -194,7 +202,7 @@ defined('ROOT') OR exit('No direct script access allowed');
 
                 if ( ! ($controller instanceof  OW_Controller) ) {
 
-                    debug(" Controller '". OW_System::$Request->getAttributes()['controller'] ."' is not instance of OW_Controller ");
+                    //debug(" Controller '". OW_System::$Request->getAttributes()['controller'] ."' is not instance of OW_Controller ");
 
 
                 } else {
@@ -211,14 +219,14 @@ defined('ROOT') OR exit('No direct script access allowed');
 
                         if (SYSTEM_MODE == 'DEV') {
 
-                            debug("Method '" . $method . "' not found in Controller '" . OW_System::$Request->getAttributes()['controller'] . "'");
+                            //debug("Method '" . $method . "' not found in Controller '" . OW_System::$Request->getAttributes()['controller'] . "'");
 
                         } else {
 
                             /**
                              * inteligent managing
                              */
-                            debug("Method '" . $method . "' not found in Controller '" . OW_System::$Request->getAttributes()['controller'] . "' (inteligent managing)");
+                            //debug("Method '" . $method . "' not found in Controller '" . OW_System::$Request->getAttributes()['controller'] . "' (inteligent managing)");
                         }
                     }
 
@@ -358,6 +366,22 @@ defined('ROOT') OR exit('No direct script access allowed');
      public static function setMiddlewareAnalysingIncomingRequest(bool $middleware_analysing_incoming_request): void
      {
          self::$middleware_analysing_incoming_request = $middleware_analysing_incoming_request;
+     }
+
+     /**
+      * @return string
+      */
+     public static function getBaseUrl(): string
+     {
+         return self::$base_url;
+     }
+
+     /**
+      * @param string $base_url
+      */
+     public static function setBaseUrl(string $base_url): void
+     {
+         self::$base_url = $base_url;
      }
 
 
