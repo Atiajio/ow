@@ -16,6 +16,8 @@
 14- intrgrer le systeme des observeurs pour le control des erreurs
 15- penser a regarder le cours de openclassroom sur les elements du design pattern et controller notre code avec
 16- penser a gerer PDO pour les drivers de databases (aller juste sur code igniter DB.php et voir a la fin comment il charge les subdrivers)
+17- gerer les traductions du site web.
+
 
 Details pour la console
     0- Structure
@@ -64,19 +66,3 @@ Details pour la console
                 --model
                 --view 
 
-
-
-
-
-//By default, we assume that it is not
-//an AJAX request.
-$isAjaxRequest = false;
-
-//IF HTTP_X_REQUESTED_WITH is equal to xmlhttprequest
-if(
-    isset($_SERVER['HTTP_X_REQUESTED_WITH']) &&
-    strcasecmp($_SERVER['HTTP_X_REQUESTED_WITH'], 'xmlhttprequest') == 0
-){
-    //Set our $isAjaxRequest to true.
-    $isAjaxRequest = true;
-}

@@ -29,7 +29,7 @@ defined('ROOT') OR exit('No direct script access allowed');
          * sinon on retourne juste la page template
          */
 
-        if(true){
+        if(OW_System::isAjaxRequest() == false){
 
             /**
              * Retrour de la reponse en fonction du mode UI installé
@@ -58,7 +58,7 @@ defined('ROOT') OR exit('No direct script access allowed');
                 /**
                  * Retour de la reponse json
                  */
-
+                echo json_encode($response->getContent(), JSON_NUMERIC_CHECK);
             } else {
 
                 debug('The Controller mus call the function respond() LIKE  $this->respond(); at the end of the controller function. ');

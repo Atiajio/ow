@@ -35,6 +35,20 @@ defined('ROOT') OR exit('No direct script access allowed');
     private static string $Default_controller = "Starter";
     private static string $Default_method = "index";
     private static string $base_url = "http://localhost/ow";
+    private static bool $ajax_request = false;
+
+
+    public function __construct()
+    {
+
+        //IF HTTP_X_REQUESTED_WITH is equal to xmlhttprequest
+        if(
+            isset($_SERVER['HTTP_X_REQUESTED_WITH']) &&
+            strcasecmp($_SERVER['HTTP_X_REQUESTED_WITH'], 'xmlhttprequest') == 0
+        ){
+            self::$ajax_request = true;
+        }
+    }
 
 
      /**
@@ -202,7 +216,7 @@ defined('ROOT') OR exit('No direct script access allowed');
 
                 if ( ! ($controller instanceof  OW_Controller) ) {
 
-                    //debug(" Controller '". OW_System::$Request->getAttributes()['controller'] ."' is not instance of OW_Controller ");
+                    debug(" Controller '". OW_System::$Request->getAttributes()['controller'] ."' is not instance of OW_Controller ");
 
 
                 } else {
@@ -219,14 +233,14 @@ defined('ROOT') OR exit('No direct script access allowed');
 
                         if (SYSTEM_MODE == 'DEV') {
 
-                            //debug("Method '" . $method . "' not found in Controller '" . OW_System::$Request->getAttributes()['controller'] . "'");
+                            debug("Method '" . $method . "' not found in Controller '" . OW_System::$Request->getAttributes()['controller'] . "'");
 
                         } else {
 
                             /**
                              * inteligent managing
                              */
-                            //debug("Method '" . $method . "' not found in Controller '" . OW_System::$Request->getAttributes()['controller'] . "' (inteligent managing)");
+                            debug("Method '" . $method . "' not found in Controller '" . OW_System::$Request->getAttributes()['controller'] . "' (inteligent managing)");
                         }
                     }
 
@@ -383,6 +397,23 @@ defined('ROOT') OR exit('No direct script access allowed');
      {
          self::$base_url = $base_url;
      }
+
+     /**
+      * @return bool
+      */
+     public static function isAjaxRequest(): bool
+     {
+         return self::$ajax_request;
+     }
+
+     /**
+      * @param bool $ajax_request
+      */
+     public static function setAjaxRequest(bool $ajax_request): void
+     {
+         self::$ajax_request = $ajax_request;
+     }
+
 
 
 
