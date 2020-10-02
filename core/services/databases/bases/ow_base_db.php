@@ -8,7 +8,7 @@ defined('ROOT') OR exit('No direct script access allowed');
 class OW_Base_Db implements  OW_Db_Interface {
 
 
-    public static  function DB($params = '')
+    public static function DB($params = '')
     {
 
         /**
@@ -19,6 +19,8 @@ class OW_Base_Db implements  OW_Db_Interface {
         {
             debug('You have not selected a database type to connect to.', true);
         }
+
+
 
         $driver = 'OW_'. ucwords($params['dbdriver']) .'_Db_Driver';
 

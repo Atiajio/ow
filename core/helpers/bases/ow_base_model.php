@@ -8,6 +8,21 @@ defined('ROOT') OR exit('No direct script access allowed');
 class OW_Base_Model extends OW_Object implements OW_Model_Interface {
 
     /**
+     * $useTable = ''; // This model does not use a database table
+     * $useTable = 'example'; // This model uses a database table 'example'
+     * @var string
+     */
+    protected string $useTable = '';
+
+    /**
+     * $tablePrefix = ''; // will look for 'alternate_examples'
+     *
+     * @var string
+     */
+    protected string $tablePrefix = '';
+
+
+    /**
      * @var array
      */
     protected static array $associations =  array('belongsTo', 'hasOne', 'hasMany', 'hasAndBelongsToMany');
@@ -174,7 +189,34 @@ class OW_Base_Model extends OW_Object implements OW_Model_Interface {
      */
     public function create(array $options_echappees = array(), array $options_non_echappees = array()): bool
     {
-        // TODO: Implement create() method.
+        if (empty($options_echappees) AND empty($options_non_echappees)) {
+
+            return false;
+
+        }
+
+        return (bool) OW_System::$db->set($options_echappees)
+                               ->set($options_non_echappees, null, false)
+                               ->insert($this->tablePrefix .'' . $this->useTable);
+    }
+
+    /**
+     * Reading information in one table
+     *
+     * @param string $select
+     * @param array $where
+     * @param null $nb
+     * @param null $debut
+     * @return mixed
+     */
+    public function read($select = '*', $where = array(), $nb = null, $debut = null): array
+    {
+        return OW_System::$db->select($select)
+                        ->from($this->tablePrefix .'' . $this->useTable)
+                        ->where($where)
+                        ->limit($nb, $debut)
+                        ->get()
+                        ->result();
     }
 
     /**
@@ -187,7 +229,23 @@ class OW_Base_Model extends OW_Object implements OW_Model_Interface {
      */
     public function update(array $where, array $options_echappees = array(), array $options_non_echappees = array()): bool
     {
-        // TODO: Implement update() method.
+
+        if (empty($options_echappees) AND empty($options_non_echappees)) {
+
+            return false;
+
+        }
+
+        if (is_integer($where)) {
+
+            $where = array('id' => $where);
+
+        }
+
+        return (bool) OW_System::$db->set($options_echappees)
+                                    ->set($options_non_echappees, null, false)
+                                    ->where($where)
+                                    ->update($this->tablePrefix .'' . $this->useTable);
     }
 
     /**
@@ -198,7 +256,14 @@ class OW_Base_Model extends OW_Object implements OW_Model_Interface {
      */
     public function delete(array $where): bool
     {
-        // TODO: Implement delete() method.
+        if (is_integer($where)) {
+
+            $where = array('id' => $where);
+
+        }
+
+        return (bool) OW_System::$db->where($where)
+                                    ->delete($this->tablePrefix .'' . $this->useTable);
     }
 
     /**
@@ -209,7 +274,11 @@ class OW_Base_Model extends OW_Object implements OW_Model_Interface {
      */
     public function count(array $where = array()): int
     {
-        // TODO: Implement count() method.
+
+        return (int) OW_System::$db->where($where)
+                              ->from($this->tablePrefix .'' . $this->useTable)
+                              ->count_all_results();
+
     }
 
     /**

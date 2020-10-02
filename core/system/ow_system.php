@@ -41,13 +41,7 @@ defined('ROOT') OR exit('No direct script access allowed');
     public function __construct()
     {
 
-        //IF HTTP_X_REQUESTED_WITH is equal to xmlhttprequest
-        if(
-            isset($_SERVER['HTTP_X_REQUESTED_WITH']) &&
-            strcasecmp($_SERVER['HTTP_X_REQUESTED_WITH'], 'xmlhttprequest') == 0
-        ){
-            self::$ajax_request = true;
-        }
+
     }
 
 

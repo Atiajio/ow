@@ -1,12 +1,9 @@
-0- Structure
-    definir les deux types de requetes : ow_ajax_request, et la requete normale
 1- console (types de bases : system, application, middleware, migrations)
 2- testUnitaires
 3- migrations
-4- middleware
 5- Model, view, Controller, Middleware auto generator
 6- Online MVC, Middleware editing
-7- Parrallel programming when important (beaucoup) de threads quand pn parcour les array : ecrire des functions common pour cela
+7- Parrallel programming when important (beaucoup) de threads quand on parcour les array : ecrire des functions common pour cela
 8- Controll editing mode like offer edit document (global user with Id and IP Save)
 9- form generator in 2 ways (html code with classes and ids) or array return generator
 10- Unique file upload (md5_file)
@@ -17,6 +14,9 @@
 15- penser a regarder le cours de openclassroom sur les elements du design pattern et controller notre code avec
 16- penser a gerer PDO pour les drivers de databases (aller juste sur code igniter DB.php et voir a la fin comment il charge les subdrivers)
 17- gerer les traductions du site web.
+18- utiliser la classe route dans le sens de faire la nomenclatures des routes : exemple: https://site.com/controller/method/params/.... ==> https://site.com/route_name/params/...
+    pour ceux ne veulent qu on determine l architechture de leurs site juste en regardant les liens urls
+19- bien gerer les reponses Headers
 
 
 Details pour la console

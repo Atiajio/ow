@@ -17,6 +17,13 @@ $ouput = '
     <div id="ow_root"></div>
 </body>
 
+<script type="text/javascript" src="'. base_url("/core/helpers/scripts/jquery.js") .'"></script>
+<script type="text/javascript">
+    let BASE_URL = \''. base_url() .'\';
+</script>
+<script type="text/javascript" src="'. base_url("/core/helpers/scripts/request.js") .'"></script>
+<script type="text/javascript" src="'. base_url("/core/helpers/scripts/console.js") .'"></script>
+<script type="text/javascript" src="'. base_url("/core/helpers/scripts/translations.js") .'"></script>
 <script type="text/javascript" src="'. base_url("/public/dist/js/router.js") .'"></script>
 </html>';
 

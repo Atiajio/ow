@@ -5,7 +5,7 @@
  */
 defined('ROOT') OR exit('No direct script access allowed');
 
-class OW_Base_Db_Driver implements  OW_Db_Driver_Interface {
+class OW_Base_Db_Driver extends OW_Base_Db_Query_Builder implements  OW_Db_Driver_Interface {
 
     /**
      * Data Source Name / Connect string

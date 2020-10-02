@@ -1,0 +1,1 @@
+OW.get("starter/index", {id : 1});

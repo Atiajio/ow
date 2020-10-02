@@ -128,6 +128,17 @@ interface OW_Model_Interface  {
     public function find(string $type, array $options = []): array;
 
     /**
+     * Reading information in one table
+     *
+     * @param string $select
+     * @param array $where
+     * @param null $nb
+     * @param null $debut
+     * @return array
+     */
+    public function read($select = '*', $where = array(), $nb = null, $debut = null): array;
+
+    /**
      * Ecris les informations necessaires a la creation d'un nouvel objet dans la base de données
      *
      * @param array $options_echappees

@@ -31,23 +31,9 @@ class OW_Model extends OW_Base_Model{
     }
 
     /**
-     * $useTable = false; // This model does not use a database table
-     * $useTable = 'exmp'; // This model uses a database table 'exmp'
-     * @var bool
-     */
-    protected $useTable = false;
-
-    /**
-     * $tablePrefix = 'ow_table_prefix_'; // will look for 'alternate_examples'
-     *
      * @var string
      */
-    protected $tablePrefix = 'ow_table_prefix_';
-
-    /**
-     * @var string
-     */
-    protected $primaryKey = 'id';
+    protected string $primaryKey = 'id';
 
     /**
      * Champ a afficher en cas de to_string de l'element
@@ -60,7 +46,7 @@ class OW_Model extends OW_Base_Model{
      *
      * @var string|array
      */
-    protected $displayField = 'id';
+    protected string $displayField = 'id';
 
     /**
      *
@@ -72,10 +58,6 @@ class OW_Model extends OW_Base_Model{
      * @var array 
      */
 
-    /**
-     * @var
-     */
-    protected $_hidden;
 
 
 }

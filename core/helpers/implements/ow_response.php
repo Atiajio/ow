@@ -77,30 +77,32 @@ defined('ROOT') OR exit('No direct script access allowed');
 
      /**
       */
-     public $headers;
+     public OW_Header $headers;
 
      /**
       * @var string
       */
-     protected $content;
+     protected string $content;
 
-     protected  $content_sent =  false;
+     protected array $body;
+
+     protected bool $content_sent =  false;
 
      /**
       * @var int
       */
-     protected $statusCode;
+     protected int $statusCode;
 
      /**
       * @var string
       */
-     protected $statusText;
+     protected string $statusText;
 
 
      /**
       * Status codes translation table.
       */
-     public static $statusTexts = [
+     public static array $statusTexts = [
          100 => 'Continue',
          101 => 'Switching Protocols',
          102 => 'Processing',            // RFC2518
@@ -176,6 +178,7 @@ defined('ROOT') OR exit('No direct script access allowed');
      }
 
      /**
+      * @return mixed|OW_Header
       */
      public function getHeaders()
      {
@@ -183,9 +186,9 @@ defined('ROOT') OR exit('No direct script access allowed');
      }
 
      /**
-      * @param $headers
+      * @param OW_Header $headers
       */
-     public function setHeaders($headers)
+     public function setHeaders(OW_Header $headers)
      {
          $this->headers = $headers;
      }
@@ -201,7 +204,7 @@ defined('ROOT') OR exit('No direct script access allowed');
      /**
       * @param string $content
       */
-     public function setContent($content)
+     public function setContent(string $content)
      {
          $this->content = $content;
      }
@@ -217,7 +220,7 @@ defined('ROOT') OR exit('No direct script access allowed');
      /**
       * @param string $statusText
       */
-     public function setStatusText($statusText)
+     public function setStatusText(string $statusText)
      {
          $this->statusText = $statusText;
      }
@@ -233,7 +236,7 @@ defined('ROOT') OR exit('No direct script access allowed');
      /**
       * @param array $statusTexts
       */
-     public static function setStatusTexts($statusTexts)
+     public static function setStatusTexts(array $statusTexts)
      {
          self::$statusTexts = $statusTexts;
      }
@@ -249,7 +252,7 @@ defined('ROOT') OR exit('No direct script access allowed');
      /**
       * @param int $statusCode
       */
-     public function setStatusCode($statusCode)
+     public function setStatusCode(int $statusCode)
      {
          $this->statusCode = $statusCode;
      }
@@ -265,11 +268,32 @@ defined('ROOT') OR exit('No direct script access allowed');
      /**
       * @param bool $content_sent
       */
-     public function setContentSent($content_sent)
+     public function setContentSent(bool $content_sent)
      {
          $this->content_sent = $content_sent;
      }
 
+     /**
+      * @return array
+      */
+     public function getBody(): array
+     {
+         return $this->body;
+     }
+
+     /**
+      * @param array $body
+      */
+     public function setBody(array $body): void
+     {
+         $this->body = $body;
+     }
+
+     public function sendHeader(){
+
+         debug($this->getHeaders()->all());
+
+     }
 
      /**
       * @return string

@@ -28,6 +28,13 @@ defined('ROOT') OR exit('No direct script access allowed');
          * Si la requete est en mode Ajax on lance les middelwares et toute la suite
          * sinon on retourne juste la page template
          */
+        //IF HTTP_X_REQUESTED_WITH is equal to xmlhttprequest
+        if(
+            isset($_SERVER['HTTP_X_REQUESTED_WITH']) &&
+            strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest'
+        ){
+            OW_System::setAjaxRequest(true);
+        }
 
         if(OW_System::isAjaxRequest() == false){
 
@@ -58,7 +65,10 @@ defined('ROOT') OR exit('No direct script access allowed');
                 /**
                  * Retour de la reponse json
                  */
-                echo json_encode($response->getContent(), JSON_NUMERIC_CHECK);
+                //$response->sendHeader();
+                //debug(headers_list());
+                echo json_encode($response->getBody(), JSON_NUMERIC_CHECK);
+
             } else {
 
                 debug('The Controller mus call the function respond() LIKE  $this->respond(); at the end of the controller function. ');

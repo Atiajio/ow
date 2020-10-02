@@ -5,119 +5,119 @@
  */
 defined('ROOT') OR exit('No direct script access allowed');
 
-abstract class OW_Base_Db_Query_Builder implements  OW_Db_Query_Builder {
+class OW_Base_Db_Query_Builder implements  OW_Db_Query_Builder_Interface {
 
     /**
      * Return DELETE SQL flag
      *
      * @var	bool
      */
-    protected $return_delete_sql		= FALSE;
+    protected bool $return_delete_sql = FALSE;
 
     /**
      * Reset DELETE data flag
      *
      * @var	bool
      */
-    protected $reset_delete_data		= FALSE;
+    protected bool $reset_delete_data = FALSE;
 
     /**
      * QB SELECT data
      *
      * @var	array
      */
-    protected $qb_select			= array();
+    protected array $qb_select = array();
 
     /**
      * QB DISTINCT flag
      *
      * @var	bool
      */
-    protected $qb_distinct			= FALSE;
+    protected bool $qb_distinct = FALSE;
 
     /**
      * QB FROM data
      *
      * @var	array
      */
-    protected $qb_from			= array();
+    protected array $qb_from = array();
 
     /**
      * QB JOIN data
      *
      * @var	array
      */
-    protected $qb_join			= array();
+    protected array $qb_join = array();
 
     /**
      * QB WHERE data
      *
      * @var	array
      */
-    protected $qb_where			= array();
+    protected array $qb_where = array();
 
     /**
      * QB GROUP BY data
      *
      * @var	array
      */
-    protected $qb_groupby			= array();
+    protected array $qb_groupby = array();
 
     /**
      * QB HAVING data
      *
      * @var	array
      */
-    protected $qb_having			= array();
+    protected array $qb_having = array();
 
     /**
      * QB keys
      *
      * @var	array
      */
-    protected $qb_keys			= array();
+    protected array $qb_keys = array();
 
     /**
      * QB LIMIT data
      *
      * @var	int
      */
-    protected $qb_limit			= FALSE;
+    protected $qb_limit = FALSE;
 
     /**
      * QB OFFSET data
      *
      * @var	int
      */
-    protected $qb_offset			= FALSE;
+    protected $qb_offset = FALSE;
 
     /**
      * QB ORDER BY data
      *
      * @var	array
      */
-    protected $qb_orderby			= array();
+    protected array $qb_orderby = array();
 
     /**
      * QB data sets
      *
      * @var	array
      */
-    protected $qb_set			= array();
+    protected array $qb_set = array();
 
     /**
      * QB data set for update_batch()
      *
      * @var	array
      */
-    protected $qb_set_ub			= array();
+    protected array $qb_set_ub = array();
 
     /**
      * QB aliased tables list
      *
      * @var	array
      */
-    protected $qb_aliased_tables		= array();
+    protected array $qb_aliased_tables		= array();
 
     /**
      * QB WHERE group started flag
@@ -131,7 +131,7 @@ abstract class OW_Base_Db_Query_Builder implements  OW_Db_Query_Builder {
      *
      * @var	int
      */
-    protected $qb_where_group_count		= 0;
+    protected int $qb_where_group_count		= 0;
 
     // Query Builder Caching variables
 
@@ -140,91 +140,91 @@ abstract class OW_Base_Db_Query_Builder implements  OW_Db_Query_Builder {
      *
      * @var	bool
      */
-    protected $qb_caching				= FALSE;
+    protected $qb_caching	 = FALSE;
 
     /**
      * QB Cache exists list
      *
      * @var	array
      */
-    protected $qb_cache_exists			= array();
+    protected array $qb_cache_exists = array();
 
     /**
      * QB Cache SELECT data
      *
      * @var	array
      */
-    protected $qb_cache_select			= array();
+    protected array $qb_cache_select = array();
 
     /**
      * QB Cache FROM data
      *
      * @var	array
      */
-    protected $qb_cache_from			= array();
+    protected array $qb_cache_from = array();
 
     /**
      * QB Cache JOIN data
      *
      * @var	array
      */
-    protected $qb_cache_join			= array();
+    protected array $qb_cache_join = array();
 
     /**
      * QB Cache aliased tables list
      *
      * @var	array
      */
-    protected $qb_cache_aliased_tables			= array();
+    protected array $qb_cache_aliased_tables = array();
 
     /**
      * QB Cache WHERE data
      *
      * @var	array
      */
-    protected $qb_cache_where			= array();
+    protected array $qb_cache_where = array();
 
     /**
      * QB Cache GROUP BY data
      *
      * @var	array
      */
-    protected $qb_cache_groupby			= array();
+    protected array $qb_cache_groupby = array();
 
     /**
      * QB Cache HAVING data
      *
      * @var	array
      */
-    protected $qb_cache_having			= array();
+    protected array $qb_cache_having = array();
 
     /**
      * QB Cache ORDER BY data
      *
      * @var	array
      */
-    protected $qb_cache_orderby			= array();
+    protected array $qb_cache_orderby = array();
 
     /**
      * QB Cache data sets
      *
      * @var	array
      */
-    protected $qb_cache_set				= array();
+    protected array $qb_cache_set	 = array();
 
     /**
      * QB No Escape data
      *
      * @var	array
      */
-    protected $qb_no_escape 			= array();
+    protected array $qb_no_escape  = array();
 
     /**
      * QB Cache No Escape data
      *
      * @var	array
      */
-    protected $qb_cache_no_escape			= array();
+    protected array $qb_cache_no_escape = array();
 
     // --------------------------------------------------------------------
 
@@ -2661,16 +2661,16 @@ abstract class OW_Base_Db_Query_Builder implements  OW_Db_Query_Builder {
     {
         $this->_reset_run(array(
             'qb_cache_select'		=> array(),
-            'qb_cache_from'			=> array(),
-            'qb_cache_join'			=> array(),
-            'qb_cache_where'		=> array(),
-            'qb_cache_groupby'		=> array(),
-            'qb_cache_having'		=> array(),
-            'qb_cache_orderby'		=> array(),
-            'qb_cache_set'			=> array(),
-            'qb_cache_exists'		=> array(),
-            'qb_cache_no_escape'	=> array(),
-            'qb_cache_aliased_tables'	=> array()
+            'qb_cache_from' => array(),
+            'qb_cache_join' => array(),
+            'qb_cache_where' => array(),
+            'qb_cache_groupby' => array(),
+            'qb_cache_having' => array(),
+            'qb_cache_orderby' => array(),
+            'qb_cache_set' => array(),
+            'qb_cache_exists' => array(),
+            'qb_cache_no_escape' => array(),
+            'qb_cache_aliased_tables' => array()
         ));
 
         return $this;

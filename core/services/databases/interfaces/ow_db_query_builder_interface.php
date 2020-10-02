@@ -5,7 +5,7 @@
  */
 defined('ROOT') OR exit('No direct script access allowed');
 
-interface OW_Db_Query_Builder {
+interface OW_Db_Query_Builder_Interface {
 
     /**
      * Select
