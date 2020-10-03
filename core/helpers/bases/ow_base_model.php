@@ -8,6 +8,15 @@ defined('ROOT') OR exit('No direct script access allowed');
 class OW_Base_Model extends OW_Object implements OW_Model_Interface {
 
     /**
+     * Champs par defaut d'une table
+     */
+
+    protected OW_Db_Element $id;
+    protected OW_Db_Element $soft_deleted;
+    protected OW_Db_Element $created_at;
+    protected OW_Db_Element $updated_at;
+
+    /**
      * $useTable = ''; // This model does not use a database table
      * $useTable = 'example'; // This model uses a database table 'example'
      * @var string
@@ -27,6 +36,32 @@ class OW_Base_Model extends OW_Object implements OW_Model_Interface {
      */
     protected static array $associations =  array('belongsTo', 'hasOne', 'hasMany', 'hasAndBelongsToMany');
 
+    public function __construct($params = null)
+    {
+        /**
+         * Gestion de l'attribut id
+         */
+        $this->id = new OW_Db_Element("id");
+        $this->id->type(OW_Db_Element::SERIAL);
+
+        /**
+         * Gestion de l'attribut soft_deleted
+         */
+        $this->soft_deleted = new OW_Db_Element("soft_deleted");
+        $this->soft_deleted->type(OW_Db_Element::BIT)->standard('0');
+
+        /**
+         * Gestion de l'attribut created_at
+         */
+        $this->created_at = new OW_Db_Element("created_at");
+        $this->created_at->type(OW_Db_Element::TIMESTAMP)->standard('CURRENT_TIMESTAMP()');
+
+        /**
+         * Gestion de l'attribut updated_at
+         */
+        $this->updated_at = new OW_Db_Element("updated_at");
+        $this->updated_at->type(OW_Db_Element::TIMESTAMP)->standard('CURRENT_TIMESTAMP()')->on_update('CURRENT_TIMESTAMP()');
+    }
 
     /**
      * Retourne les type d'Associations dans le systeme

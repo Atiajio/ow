@@ -14,6 +14,14 @@ defined('ROOT') OR exit('No direct script access allowed');
 OW_System::register_base_url("http://localhost/ow");
 
 /**
+ * System mode
+ * DEV OR PROD
+ * default ==> DEV
+ */
+
+OW_System::register_mode('DEV');
+
+/**
  * System View type Configuration
  *  UI options
  *  => React

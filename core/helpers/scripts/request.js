@@ -4,12 +4,11 @@
  */
 
 var OW = {
-    get : function(url, params, return_type ='json'){
+    get : function(url, params, call_back_success, call_back_error , return_type ='json'){
         /**
          * Gestion des requestes de type get
          */
         let final_url = BASE_URL + url;
-        console.log(final_url)
         $.ajax(
             {
                 url : final_url,
@@ -17,15 +16,19 @@ var OW = {
                 method : 'GET',
                 dataType : return_type,
                 success : function (result){
-                    console.log(result)
+
+                    call_back_success(result);
+
                 },
                 error : function (result){
-                    console.error(result)
+
+                    call_back_error(result);
+
                 }
             }
         );
     },
-    post : function(url, params){
+    post : function(url, params, call_back_success, call_back_error , return_type ='json'){
         /**
          * Gestion des requestes de type post
          */
@@ -37,10 +40,14 @@ var OW = {
                 method : 'POST',
                 dataType : return_type,
                 success : function (result){
-                    console.log(result)
+
+                    call_back_success(result);
+
                 },
                 error : function (result){
-                    console.error(result)
+
+                    call_back_error(result);
+
                 }
             }
         );

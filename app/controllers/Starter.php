@@ -9,10 +9,9 @@ class Starter extends OW_Controller{
 
     public function index(){
 
-        $this->model("User");
+        $this->model("Receipe")->getSQLCreateTable();
+        $this->model("Receipe")->getSqlMigration();
 
-        $data = $this->model("User")->read('*');
-        $this->response->setBody($data);
         $this->respond();
     }
 

@@ -175,6 +175,7 @@ defined('ROOT') OR exit('No direct script access allowed');
      public function __construct(OW_Request $request)
      {
          $this->headers = $request->getHeaders();
+         $this->body = array();
      }
 
      /**

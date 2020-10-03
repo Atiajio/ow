@@ -37,6 +37,8 @@ defined('ROOT') OR exit('No direct script access allowed');
     private static string $base_url = "http://localhost/ow";
     private static bool $ajax_request = false;
 
+    private static string $mode = "DEV";
+
 
     public function __construct()
     {
@@ -56,6 +58,21 @@ defined('ROOT') OR exit('No direct script access allowed');
         self::$middleware[] = $new_middleware;
 
     }
+
+     public static function register_mode(string $mode)
+     {
+
+         if (in_array(strtoupper($mode), array('PROD', 'DEV'))) {
+
+             self::$mode = strtoupper($mode);
+
+         } else {
+
+             debug("The System mode in config file is unknown ! Available 'PROD' | 'DEV'", true);
+
+         }
+
+     }
 
      /**
       * Fonction d'enregistrement des middlewares
@@ -406,6 +423,14 @@ defined('ROOT') OR exit('No direct script access allowed');
      public static function setAjaxRequest(bool $ajax_request): void
      {
          self::$ajax_request = $ajax_request;
+     }
+
+     /**
+      * @return string
+      */
+     public static function getMode(): string
+     {
+         return self::$mode;
      }
 
 

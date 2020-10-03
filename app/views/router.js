@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
 
+import Home from './components/Home';
+
 import './app.scss';
 
 function OW_Router() {
@@ -10,11 +12,8 @@ function OW_Router() {
         <div className="app">
             <Router>
             <Switch>
-                <Route path="/ow/home">
-                    <h5> Vermont Est dans la place Home</h5>
-                </Route>
                 <Route path="/">
-                    <h5> Vermont Est dans la place /</h5>
+                    <Home />
                 </Route>
             </Switch>
             </Router>

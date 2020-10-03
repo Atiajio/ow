@@ -1,0 +1,58 @@
+.logo_container{
+    text-align: center;
+}
+
+.logo_container img {
+    display:inline-block;
+    height:400px;
+}
+
+.demo_home_component {
+    font-size: 25px;
+    font-weight: bold;
+    text-align:center;
+    position:relative;
+    top:-50px;
+    padding: 50px;
+    background-color:#1B5E1A;
+    color:white;
+}
+
+.installation_ok{
+    text-align: center;
+    color: #1B5E1A;
+    font-weight: bold;
+    font-size:18px;
+}
+
+.important_links {
+    width: 50%;
+    margin: auto;
+    margin-top: 50px;
+    display:flex;
+    justify-content:space-between;
+}
+
+.link{
+    color: #1B5E1A;
+    border: 1px solid #1B5E1A;
+    height: 100px;
+    line-height: 100px;
+    width:200px;
+    text-align: center;
+    font-size: 18px;
+}
+
+.link:hover{
+    background-color:#1B5E1A;
+    color: white;
+}
+
+.link:hover a{
+    color: white;
+}
+
+.link a{
+    text-decoration: none;
+    color: #1B5E1A;
+}
