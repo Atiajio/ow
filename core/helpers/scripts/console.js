@@ -68,32 +68,20 @@ $(document).ready(function () {
                             var div_response = '<div> ' + $result.result +'</div>';
                             var $div_response = $(div_response);
 
-                            $div_response.css(
-                                {
-                                    padding:"5px",
-                                    margin:"5px",
-                                    border:"1px solid #1B5E1A",
-                                    fontSize: "12px"
-                                }
-                            );
+
                             $('.ow_console_viewer').append($div_response);
                             console_is_on = false;
                             addGettinginfosline();
                         }
 
                         function error($result) {
-
-                            var div_response = '<div> AJAX ERROR </div>';
+                            console.log($result)
+                            var div_response = '<div>' +
+                                                    '<p>' + $result.responseText +
+                                                    '</p>' +
+                                                ' </div>';
                             var $div_response = $(div_response);
 
-                            $div_response.css(
-                                {
-                                    padding:"5px",
-                                    margin:"5px",
-                                    border:"1px solid red",
-                                    fontSize: "12px"
-                                }
-                            );
                             $('.ow_console_viewer').append($div_response);
                             console_is_on = false;
                             addGettinginfosline();

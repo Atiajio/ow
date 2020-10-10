@@ -80,3 +80,16 @@ Details pour la console
                         run -p 45646
          help:
                --
+
+
+//
+Petite convention pour le nommage des fonctions help des commande
+si une commade est de la forme
+
+help commande param1 .... paramx
+
+sa function help doit etre
+getHelpCommandeParam1Param2....Paramx();
+
+pour l equivalent en execution faire
+startExecCommandeParam1Param2....Paramx();

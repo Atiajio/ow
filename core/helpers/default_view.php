@@ -8,9 +8,15 @@ $ouput = '
 
     <title>OW Home</title>
     <meta name="description" content="OW Home">
-    <meta name="author" content="SitePoint">
+    <meta name="author" content="SitePoint">';
 
-    <link rel="stylesheet" href="'. base_url("/public/font-awesome/css/font-awesome.css") .'">
+if (OW_System::getMode() == "DEV") {
+
+    $ouput .=   '<link rel="stylesheet" href="'. base_url("/public/css/console.css") .'">';
+
+}
+
+ $ouput .=   '<link rel="stylesheet" href="'. base_url("/public/font-awesome/css/font-awesome.css") .'">
     <link rel="stylesheet" href="'. base_url("/public/dist/css/app.css") .'">
 </head>
 
