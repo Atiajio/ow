@@ -7,6 +7,10 @@ defined('ROOT') OR exit('No direct script access allowed');
 
 class OW_Application_Cmd extends OW_Base_Command{
 
+    /**
+     * @param array $params
+     * @return string
+     */
     public static function run(array $params) : string
     {
         $output_cmd = "";
@@ -61,6 +65,10 @@ class OW_Application_Cmd extends OW_Base_Command{
         return $output_cmd;
     }
 
+    /**
+     * @param array $params
+     * @return string
+     */
     public static function help(array $params) : string
     {
         $output_cmd = "";
@@ -141,6 +149,20 @@ class OW_Application_Cmd extends OW_Base_Command{
 
     }
 
+    /**
+     * @param array $params
+     * @return string
+     */
+    public static function startExecApplicationControllerList(array $params){
+
+        return 'Not Ready yet ';
+
+    }
+
+    /**
+     * @param bool $show_cmd
+     * @return string
+     */
     public static function getHelpApplicationControllerCreate(bool $show_cmd = false) {
 
         return '<tr>
@@ -159,6 +181,20 @@ class OW_Application_Cmd extends OW_Base_Command{
 
     }
 
+    /**
+     * @param array $params
+     * @return string
+     */
+    public static function startExecApplicationControllerCreate(array $params){
+
+        return 'Not Ready yet ';
+
+    }
+
+    /**
+     * @param bool $show_cmd
+     * @return string
+     */
     public static function getHelpApplicationControllerEdit(bool $show_cmd = false) {
 
         return '<tr>
@@ -177,6 +213,20 @@ class OW_Application_Cmd extends OW_Base_Command{
 
     }
 
+    /**
+     * @param array $params
+     * @return string
+     */
+    public static function startExecApplicationControllerEdit(array $params){
+
+        return 'Not Ready yet ';
+
+    }
+
+    /**
+     * @param bool $show_cmd
+     * @return string
+     */
     public static function getHelpApplicationControllerDelete(bool $show_cmd = false) {
 
         return ' <tr>
@@ -195,6 +245,20 @@ class OW_Application_Cmd extends OW_Base_Command{
 
     }
 
+    /**
+     * @param array $params
+     * @return string
+     */
+    public static function startExecApplicationControllerDelete(array $params){
+
+        return 'Not Ready yet ';
+
+    }
+
+    /**
+     * @param bool $show_cmd
+     * @return string
+     */
     public static function getHelpApplicationViewList(bool $show_cmd = false) {
 
         return ' <tr>
@@ -213,6 +277,20 @@ class OW_Application_Cmd extends OW_Base_Command{
 
     }
 
+    /**
+     * @param array $params
+     * @return string
+     */
+    public static function startExecApplicationViewList(array $params){
+
+        return 'Not Ready yet ';
+
+    }
+
+    /**
+     * @param bool $show_cmd
+     * @return string
+     */
     public static function getHelpApplicationViewCreate(bool $show_cmd = false) {
 
         return ' <tr>
@@ -231,6 +309,20 @@ class OW_Application_Cmd extends OW_Base_Command{
 
     }
 
+    /**
+     * @param array $params
+     * @return string
+     */
+    public static function startExecApplicationViewCreate(array $params){
+
+        return 'Not Ready yet ';
+
+    }
+
+    /**
+     * @param bool $show_cmd
+     * @return string
+     */
     public static function getHelpApplicationViewEdit(bool $show_cmd = false) {
 
         return ' <tr>
@@ -249,6 +341,20 @@ class OW_Application_Cmd extends OW_Base_Command{
 
     }
 
+    /**
+     * @param array $params
+     * @return string
+     */
+    public static function startExecApplicationViewEdit(array $params){
+
+        return 'Not Ready yet ';
+
+    }
+
+    /**
+     * @param bool $show_cmd
+     * @return string
+     */
     public static function getHelpApplicationViewDelete(bool $show_cmd = false) {
 
         return ' <tr>
@@ -267,6 +373,20 @@ class OW_Application_Cmd extends OW_Base_Command{
 
     }
 
+    /**
+     * @param array $params
+     * @return string
+     */
+    public static function startExecApplicationViewDelete(array $params){
+
+        return 'Not Ready yet ';
+
+    }
+
+    /**
+     * @param bool $show_cmd
+     * @return string
+     */
     public static function getHelpApplicationModelList(bool $show_cmd = false) {
 
         return ' <tr>
@@ -285,6 +405,20 @@ class OW_Application_Cmd extends OW_Base_Command{
 
     }
 
+    /**
+     * @param array $params
+     * @return string
+     */
+    public static function startExecApplicationModelList(array $params){
+
+        return 'Not Ready yet ';
+
+    }
+
+    /**
+     * @param bool $show_cmd
+     * @return string
+     */
     public static function getHelpApplicationModelCreate(bool $show_cmd = false) {
 
         return ' <tr>
@@ -303,6 +437,20 @@ class OW_Application_Cmd extends OW_Base_Command{
 
     }
 
+    /**
+     * @param array $params
+     * @return string
+     */
+    public static function startExecApplicationModelCreate(array $params){
+
+        return 'Not Ready yet ';
+
+    }
+
+    /**
+     * @param bool $show_cmd
+     * @return string
+     */
     public static function getHelpApplicationModelEdit(bool $show_cmd = false) {
 
         return ' <tr>
@@ -321,6 +469,20 @@ class OW_Application_Cmd extends OW_Base_Command{
 
     }
 
+    /**
+     * @param array $params
+     * @return string
+     */
+    public static function startExecApplicationModelEdit(array $params){
+
+        return 'Not Ready yet ';
+
+    }
+
+    /**
+     * @param bool $show_cmd
+     * @return string
+     */
     public static function getHelpApplicationModelDelete(bool $show_cmd = false) {
 
         return ' <tr>
@@ -339,6 +501,20 @@ class OW_Application_Cmd extends OW_Base_Command{
 
     }
 
+    /**
+     * @param array $params
+     * @return string
+     */
+    public static function startExecApplicationModelDelete(array $params){
+
+        return 'Not Ready yet ';
+
+    }
+
+    /**
+     * @param bool $show_cmd
+     * @return string
+     */
     public static function getHelpApplicationMigrationMake(bool $show_cmd = false) {
 
         return '<tr>
@@ -357,6 +533,20 @@ class OW_Application_Cmd extends OW_Base_Command{
 
     }
 
+    /**
+     * @param array $params
+     * @return string
+     */
+    public static function startExecApplicationMigrationMake(array $params){
+
+        return 'Not Ready yet ';
+
+    }
+
+    /**
+     * @param bool $show_cmd
+     * @return string
+     */
     public static function getHelpApplicationMigrationMigrate(bool $show_cmd = false) {
 
         return '<tr>
@@ -375,6 +565,20 @@ class OW_Application_Cmd extends OW_Base_Command{
 
     }
 
+    /**
+     * @param array $params
+     * @return string
+     */
+    public static function startExecApplicationMigrationMigrate(array $params){
+
+        return 'Not Ready yet ';
+
+    }
+
+    /**
+     * @param bool $show_cmd
+     * @return string
+     */
     public static function getHelpApplicationMigrationRebase(bool $show_cmd = false) {
 
         return '<tr>
@@ -393,6 +597,20 @@ class OW_Application_Cmd extends OW_Base_Command{
 
     }
 
+    /**
+     * @param array $params
+     * @return string
+     */
+    public static function startExecApplicationMigrationRebase(array $params){
+
+        return 'Not Ready yet ';
+
+    }
+
+    /**
+     * @param bool $show_cmd
+     * @return string
+     */
     public static function getHelpApplicationMigrationExport(bool $show_cmd = false) {
 
         return '<tr>
@@ -411,6 +629,20 @@ class OW_Application_Cmd extends OW_Base_Command{
 
     }
 
+    /**
+     * @param array $params
+     * @return string
+     */
+    public static function startExecApplicationMigrationExport(array $params){
+
+        return 'Not Ready yet ';
+
+    }
+
+    /**
+     * @param bool $show_cmd
+     * @return string
+     */
     public static function getHelpApplicationMigrationImport(bool $show_cmd = false) {
 
         return '<tr>
@@ -429,6 +661,20 @@ class OW_Application_Cmd extends OW_Base_Command{
 
     }
 
+    /**
+     * @param array $params
+     * @return string
+     */
+    public static function startExecApplicationMigrationImport(array $params){
+
+        return 'Not Ready yet ';
+
+    }
+
+    /**
+     * @param bool $show_cmd
+     * @return string
+     */
     public static function getHelpApplicationMigrationShow(bool $show_cmd = false) {
 
         return '<tr>
@@ -447,6 +693,20 @@ class OW_Application_Cmd extends OW_Base_Command{
 
     }
 
+    /**
+     * @param array $params
+     * @return string
+     */
+    public static function startExecApplicationMigrationShow(array $params){
+
+        return 'Not Ready yet ';
+
+    }
+
+    /**
+     * @param bool $show_cmd
+     * @return string
+     */
     public static function getHelpApplicationMigrationDelete(bool $show_cmd = false) {
 
         return '<tr>
@@ -465,6 +725,20 @@ class OW_Application_Cmd extends OW_Base_Command{
 
     }
 
+    /**
+     * @param array $params
+     * @return string
+     */
+    public static function startExecApplicationMigrationDelete(array $params){
+
+        return 'Not Ready yet ';
+
+    }
+
+    /**
+     * @param bool $show_cmd
+     * @return string
+     */
     public static function getHelpApplicationMiddlewareList(bool $show_cmd = false) {
 
         return '<tr>
@@ -483,6 +757,20 @@ class OW_Application_Cmd extends OW_Base_Command{
 
     }
 
+    /**
+     * @param array $params
+     * @return string
+     */
+    public static function startExecApplicationMiddlewareList(array $params){
+
+        return 'Not Ready yet ';
+
+    }
+
+    /**
+     * @param bool $show_cmd
+     * @return string
+     */
     public static function getHelpApplicationMiddlewareCreate(bool $show_cmd = false) {
 
         return '<tr>
@@ -501,6 +789,20 @@ class OW_Application_Cmd extends OW_Base_Command{
 
     }
 
+    /**
+     * @param array $params
+     * @return string
+     */
+    public static function startExecApplicationMiddlewareCreate(array $params){
+
+        return 'Not Ready yet ';
+
+    }
+
+    /**
+     * @param bool $show_cmd
+     * @return string
+     */
     public static function getHelpApplicationMiddlewareEdit(bool $show_cmd = false) {
 
         return '<tr>
@@ -519,6 +821,20 @@ class OW_Application_Cmd extends OW_Base_Command{
 
     }
 
+    /**
+     * @param array $params
+     * @return string#
+     */
+    public static function startExecApplicationMiddlewareEdit(array $params){
+
+        return 'Not Ready yet ';
+
+    }
+
+    /**
+     * @param bool $show_cmd
+     * @return string
+     */
     public static function getHelpApplicationMiddlewareDelete(bool $show_cmd = false) {
 
         return '<tr>
@@ -534,6 +850,12 @@ class OW_Application_Cmd extends OW_Base_Command{
                     Returns 
                  </td>
             </tr>';
+
+    }
+
+    public static function startExecApplicationMiddlewareDelete(array $params){
+
+        return 'Not Ready yet ';
 
     }
 
@@ -563,9 +885,9 @@ class OW_Application_Cmd extends OW_Base_Command{
      * @param array $params
      * @return string
      */
-    public static function startExecApplicationTestsList(array $params) {
+    public static function startExecApplicationTestsList(array $params){
 
-        return 'ApplicationTestsList';
+        return 'Not Ready yet ';
 
     }
 
@@ -595,12 +917,16 @@ class OW_Application_Cmd extends OW_Base_Command{
      * @param array $params
      * @return string
      */
-    public static function startExecApplicationTestsCreate(array $params) {
+    public static function startExecApplicationTestsCreate(array $params){
 
-        return 'ApplicationTestsCreate';
+        return 'Not Ready yet ';
 
     }
 
+    /**
+     * @param bool $show_cmd
+     * @return string
+     */
     public static function getHelpApplicationTestsDelete(bool $show_cmd = false) {
 
         return '<tr>
@@ -619,7 +945,20 @@ class OW_Application_Cmd extends OW_Base_Command{
 
     }
 
+    /**
+     * @param array $params
+     * @return string
+     */
+    public static function startExecApplicationTestsDelete(array $params){
 
+        return 'Not Ready yet ';
+
+    }
+
+    /**
+     * @param bool $show_cmd
+     * @return string
+     */
     public static function getHelpApplicationTestsRun(bool $show_cmd = false) {
 
         return '<tr>
@@ -635,6 +974,12 @@ class OW_Application_Cmd extends OW_Base_Command{
                     Returns 
                  </td>
             </tr>';
+
+    }
+
+    public static function startExecApplicationTestsRun(array $params){
+
+        return 'Not Ready yet ';
 
     }
 

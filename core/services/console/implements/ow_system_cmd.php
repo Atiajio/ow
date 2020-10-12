@@ -6,8 +6,10 @@
 defined('ROOT') OR exit('No direct script access allowed');
 
 class OW_System_Cmd extends OW_Base_Command{
-
-
+    /**
+     * @param array $params
+     * @return string
+     */
     public static function run(array $params) : string
     {
         $output_cmd = "";
@@ -49,7 +51,7 @@ class OW_System_Cmd extends OW_Base_Command{
             $output_cmd .= "Your instruction does not match any combination in the system, please consult the help.";
 
         } elseif (sizeof($possible_cmd) > 1) {
-
+            debug($possible_cmd);
             $output_cmd .= "Your instruction corresponds to more than one combination in the system, please consult the help.";
 
         } else {
@@ -62,6 +64,10 @@ class OW_System_Cmd extends OW_Base_Command{
         return $output_cmd;
     }
 
+    /**
+     * @param array $params
+     * @return string
+     */
     public static function help(array $params) : string
     {
         $output_cmd = "";
@@ -120,6 +126,11 @@ class OW_System_Cmd extends OW_Base_Command{
         return $output_cmd;
     }
 
+
+
+    /**
+     * Commands help and executors
+     */
     /**
      * @param bool $show_cmd
      * @return string
@@ -142,6 +153,20 @@ class OW_System_Cmd extends OW_Base_Command{
 
     }
 
+    /**
+     * @param array $params
+     * @return string
+     */
+    public static function startExecSysVersion(array $params){
+
+        return 'Not Ready yet ';
+
+    }
+
+    /**
+     * @param bool $show_cmd
+     * @return string
+     */
     public static function getHelpSysUpdate(bool $show_cmd = false) {
 
         return '<tr>
@@ -160,6 +185,20 @@ class OW_System_Cmd extends OW_Base_Command{
 
     }
 
+    /**
+     * @param array $params
+     * @return string
+     */
+    public static function startExecSysUpdate(array $params){
+
+        return 'Not Ready yet ';
+
+    }
+
+    /**
+     * @param bool $show_cmd
+     * @return string
+     */
     public static function getHelpSysConfigShow(bool $show_cmd = false) {
 
         return '<tr>
@@ -178,6 +217,16 @@ class OW_System_Cmd extends OW_Base_Command{
 
     }
 
+    public static function startExecSysConfigShow(array $params){
+
+        return 'Not Ready yet ';
+
+    }
+
+    /**
+     * @param bool $show_cmd
+     * @return string
+     */
     public static function getHelpSysConfigSet(bool $show_cmd = false) {
 
         return '<tr>
@@ -196,6 +245,20 @@ class OW_System_Cmd extends OW_Base_Command{
 
     }
 
+    /**
+     * @param array $params
+     * @return string
+     */
+    public static function startExecSysConfigSet(array $params){
+
+        return 'Not Ready yet ';
+
+    }
+
+    /**
+     * @param bool $show_cmd
+     * @return string
+     */
     public static function getHelpSysConfigReset(bool $show_cmd = false) {
 
         return '<tr>
@@ -214,6 +277,20 @@ class OW_System_Cmd extends OW_Base_Command{
 
     }
 
+    /**
+     * @param array $params
+     * @return string
+     */
+    public static function startExecSysConfigReset(array $params){
+
+        return 'Not Ready yet ';
+
+    }
+
+    /**
+     * @param bool $show_cmd
+     * @return string
+     */
     public static function getHelpSysConfigDelete(bool $show_cmd = false) {
 
         return '<tr>
@@ -232,6 +309,20 @@ class OW_System_Cmd extends OW_Base_Command{
 
     }
 
+    /**
+     * @param array $params
+     * @return string
+     */
+    public static function startExecSysConfigDelete(array $params){
+
+        return 'Not Ready yet ';
+
+    }
+
+    /**
+     * @param bool $show_cmd
+     * @return string
+     */
     public static function getHelpSysMigrationMake(bool $show_cmd = false) {
 
         return '<tr>
@@ -250,6 +341,20 @@ class OW_System_Cmd extends OW_Base_Command{
 
     }
 
+    /**
+     * @param array $params
+     * @return string
+     */
+    public static function startExecSysMigrationMake(array $params){
+
+        return 'Not Ready yet ';
+
+    }
+
+    /**
+     * @param bool $show_cmd
+     * @return string
+     */
     public static function getHelpSysMigrationMigrate(bool $show_cmd = false) {
 
         return '<tr>
@@ -268,6 +373,20 @@ class OW_System_Cmd extends OW_Base_Command{
 
     }
 
+    /**
+     * @param array $params
+     * @return string
+     */
+    public static function startExecSysMigrationMigrate(array $params){
+
+        return 'Not Ready yet ';
+
+    }
+
+    /**
+     * @param bool $show_cmd
+     * @return string
+     */
     public static function getHelpSysMigrationRebase(bool $show_cmd = false) {
 
         return '<tr>
@@ -286,6 +405,20 @@ class OW_System_Cmd extends OW_Base_Command{
 
     }
 
+    /**
+     * @param array $params
+     * @return string
+     */
+    public static function startExecSysMigrationRebase(array $params){
+
+        return 'Not Ready yet ';
+
+    }
+
+    /**
+     * @param bool $show_cmd
+     * @return string
+     */
     public static function getHelpSysMigrationExport(bool $show_cmd = false) {
 
         return '<tr>
@@ -304,6 +437,20 @@ class OW_System_Cmd extends OW_Base_Command{
 
     }
 
+    /**
+     * @param array $params
+     * @return string
+     */
+    public static function startExecSysMigrationExport(array $params){
+
+        return 'Not Ready yet ';
+
+    }
+
+    /**
+     * @param bool $show_cmd
+     * @return string
+     */
     public static function getHelpSysMigrationImport(bool $show_cmd = false) {
 
         return '<tr>
@@ -322,6 +469,20 @@ class OW_System_Cmd extends OW_Base_Command{
 
     }
 
+    /**
+     * @param array $params
+     * @return string
+     */
+    public static function startExecSysMigrationImport(array $params){
+
+        return 'Not Ready yet ';
+
+    }
+
+    /**
+     * @param bool $show_cmd
+     * @return string
+     */
     public static function getHelpSysMigrationShow(bool $show_cmd = false) {
 
         return '<tr>
@@ -340,6 +501,20 @@ class OW_System_Cmd extends OW_Base_Command{
 
     }
 
+    /**
+     * @param array $params
+     * @return string
+     */
+    public static function startExecSysMigrationShow(array $params){
+
+        return 'Not Ready yet ';
+
+    }
+
+    /**
+     * @param bool $show_cmd
+     * @return string
+     */
     public static function getHelpSysMigrationDelete(bool $show_cmd = false) {
 
         return '<tr>
@@ -355,6 +530,16 @@ class OW_System_Cmd extends OW_Base_Command{
                     Returns 
                  </td>
             </tr>';
+
+    }
+
+    /**
+     * @param array $params
+     * @return string
+     */
+    public static function startExecSysMigrationDelete(array $params){
+
+        return 'Not Ready yet ';
 
     }
 }

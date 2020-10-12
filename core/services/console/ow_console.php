@@ -50,7 +50,6 @@ class OW_Console extends OW_Controller {
                 $command = $params[0];
                 $command_class_name = 'OW_'. ucwords($command) .'_Cmd';
                 array_shift($params);
-
                 $output_cmd .= $command_class_name::help($params);
             }
 
@@ -70,8 +69,6 @@ class OW_Console extends OW_Controller {
                 $command = $params[0];
                 array_shift($params);
                 $command_class_name = 'OW_'. ucwords($command) .'_Cmd';
-                array_shift($params);
-
                 $output_cmd .= $command_class_name::run($params);
 
             }
@@ -144,7 +141,6 @@ class OW_Console extends OW_Controller {
 
             $table = explode('_',substr(basename($value), 0,-4));
             $command_class_name = 'OW_'. ucwords($table[1]) . '_' . ucwords($table[2]);
-
             $output .= $command_class_name::help(array());
         }
 
