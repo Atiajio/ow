@@ -751,7 +751,7 @@ class OW_Base_Db_Driver extends OW_Base_Db_Query_Builder implements  OW_Db_Drive
                 $this->_trans_status = TRUE;
             }
 
-            debug('debug', 'DB Transaction Failure');
+            debug('DB Transaction Failure', );
             return FALSE;
         }
 

@@ -6,9 +6,12 @@
 defined('ROOT') OR exit('No direct script access allowed');
 
 /**
- * Recursiv files deletion
+ * Recursive files deletion
+ *
+ * @param $dir
+ * @return bool
  */
-function recursiv_delete_directories($dir) 
+function recursive_delete_directories($dir)
 {
 	   	
     $files = array_diff(scandir($dir), array('.','..'));
@@ -23,7 +26,11 @@ function recursiv_delete_directories($dir)
 }
 
 /**
- * Recursiv get list of the files in the system
+ * Recursive get list of the files in the system
+ *
+ * @param $dir
+ * @param string $extention
+ * @return array
  */
 function recursiv_find_files($dir, $extention = "") 
 {
@@ -60,3 +67,17 @@ function recursiv_find_files($dir, $extention = "")
     
     return $return_files;
 }
+
+/**
+ * Fonction pour creer les fichiers avec un contenu
+ *
+ * @param string $content
+ * @param string $filepath
+ */
+function create_file_content(string $content, string $filepath){
+
+    file_put_contents($filepath,$content);
+
+}
+
+

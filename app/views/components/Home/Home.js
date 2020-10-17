@@ -2,6 +2,13 @@ import React, { Component } from 'react';
 import './Home.css';
 
 export default class Home extends Component {
+
+    componentDidMount() {
+
+        //OW.get('starter/index', [], '', '');
+
+    }
+
     render() {
         return (
             <div className="home">

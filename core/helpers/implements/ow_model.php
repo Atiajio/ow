@@ -48,14 +48,6 @@ class OW_Model extends OW_Base_Model{
     }
 
     /**
-     * @param array $hasOne
-     */
-    public function setHasOne(array $hasOne): void
-    {
-        $this->hasOne = $hasOne;
-    }
-
-    /**
      * @return array
      */
     public function getHasMany(): array
@@ -69,14 +61,6 @@ class OW_Model extends OW_Base_Model{
     public function hasMany(string $model_name)
     {
         $this->hasMany[] = $model_name;
-    }
-
-    /**
-     * @param array $hasMany
-     */
-    public function setHasMany(array $hasMany): void
-    {
-        $this->hasMany = $hasMany;
     }
 
     /**
@@ -95,13 +79,6 @@ class OW_Model extends OW_Base_Model{
         $this->belongsTo[] = $model_name;
     }
 
-    /**
-     * @param array $belongsTo
-     */
-    public function setBelongsTo(array $belongsTo): void
-    {
-        $this->belongsTo = $belongsTo;
-    }
 
     /**
      * @return array
@@ -120,14 +97,6 @@ class OW_Model extends OW_Base_Model{
     }
 
     /**
-     * @param array $hasAndBelongsToMany
-     */
-    public function setHasAndBelongsToMany(array $hasAndBelongsToMany): void
-    {
-        $this->hasAndBelongsToMany = $hasAndBelongsToMany;
-    }
-
-    /**
      * Funtion qui permet de donner le SQL de migration du model
      */
     public function getSqlMigration(){
@@ -136,40 +105,94 @@ class OW_Model extends OW_Base_Model{
         $instance = new $class();
         $previous_column = "id";
 
-        $sql = "ALTER TABLE ". $this->tablePrefix .'' . $this->useTable . "\n";
+        /**
+         * Recuperation des informations sur la table
+         */
+        $actual_table = $this->getActualTableInfos();
+        $sql = "-- Auto Generated Migration SQL For the Model : ". strtoupper(get_class($this)) . "\n\n";
 
-        foreach (get_object_vars ($instance) AS $attr) {
+        if (empty($actual_table) == true) {
 
-            if ($attr instanceof  OW_Db_Element) {
+            /**
+             * Cas ou la table du model n'exite pas encore
+             */
 
-                if ($attr->getName() != "id") {
+            $sql .= $this->getSQLCreateTable();
+            $sql .= "\n\n\n";
 
-                    $sql .= "\t". $attr->getAddColumnQuery($previous_column) .",\n";
+            $sql .= "ALTER TABLE ". $this->tablePrefix .'' . $this->useTable . "\n";
 
-                    $previous_column = $attr->getName();
+            foreach (get_object_vars ($instance) AS $attr) {
 
+                if ($attr instanceof  OW_Db_Element) {
+
+                    if ($attr->getName() != "id") {
+
+                        $sql .= "\t". $attr->getAddColumnQuery($previous_column) .",\n";
+
+                        $previous_column = $attr->getName();
+
+                    }
                 }
             }
+
+            $sql = substr($sql, 0, -2) .";";
+
+        } else {
+
+            /**
+             * Cas ou la table existe deja
+             */
+
         }
 
-        $sql = substr($sql, 0, -2) .";";
 
-        debug($sql);
+        return $sql;
     }
 
 
+    /**
+     * @return string
+     */
     public function getSQLCreateTable(){
 
         $sql = "
-CREATE TABLE `". $this->tablePrefix .'' . $this->useTable ."` (
-    `id` BIGINT NULL AUTO_INCREMENT COMMENT 'ID Column for the table of ". $this->useTable ."',
-    INDEX `id` (`id`)
-)
-COLLATE='utf8mb4_general_ci'
-;";
-
-        debug($sql);
+CREATE TABLE IF NOT EXISTS `". $this->tablePrefix .'' . $this->useTable ."` (
+\t`id` BIGINT NULL AUTO_INCREMENT COMMENT 'ID Column for the table of ". $this->useTable ."',
+\tINDEX `id` (`id`)
+)COLLATE='utf8mb4_general_ci';";
         return $sql;
+    }
+
+    /**
+     * Fonction qui retourne toutes les informations actuelles sur la base de données
+     *
+     * @return array
+     */
+    private function getActualTableInfos(): array
+    {
+        $sql = "
+SELECT 
+    col.COLUMN_NAME,
+    col.ORDINAL_POSITION,
+    col.COLUMN_DEFAULT,
+    col.IS_NULLABLE,
+    col.DATA_TYPE,
+    col.CHARACTER_MAXIMUM_LENGTH,
+    col.NUMERIC_PRECISION,
+    col.DATETIME_PRECISION,
+    col.COLLATION_NAME,
+    col.COLUMN_TYPE,
+    col.COLUMN_KEY,
+    col.COLUMN_KEY,
+    col.EXTRA,
+    col.COLUMN_COMMENT
+FROM INFORMATION_SCHEMA.COLUMNS AS col
+WHERE TABLE_SCHEMA = '". OW_System::$db->database  ."'
+AND TABLE_NAME = '" . $this->tablePrefix .'' . $this->useTable  ."';";
+
+        $result = OW_System::$db->query($sql);
+        return $result->result_array();
     }
 
 }

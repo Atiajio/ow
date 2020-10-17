@@ -1,4 +1,3 @@
--2- se rappeller que le systeme travail automatiquement dans les bds avec les ids
 -1- prendre aussi en compte les notions de cles (primaire etrangere ..... )
 0- terminer le system de OW_Db_Element
 00 - ajouter lors de l initialisation des bds la tmp bd, la,bd utils et la bd forge dans le system.

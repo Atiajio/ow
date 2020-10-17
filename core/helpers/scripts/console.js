@@ -3,6 +3,8 @@
  */
 
 var console_is_on = false;
+var cmd_history = [];
+var cmd_last_index = 0;
 
 $(document).ready(function () {
 
@@ -45,14 +47,59 @@ $(document).ready(function () {
                     outline: "none"
                 }
             );
+
+
+            $line.find("input").bind('keydown',function (e) {
+
+                /**
+                 * Ecoute du clavier pour les touches haut et bas pour parcourir l'historique des commandes
+                 */
+
+                if(e.keyCode === 38){
+                    /**
+                     * Touche haut
+                     */
+                    if (cmd_last_index -1 >= 0) {
+
+                        $(this).val(cmd_history[cmd_last_index -1]);
+                        cmd_last_index--;
+
+                    }
+                }
+
+                if(e.keyCode === 40){
+                    /**
+                     * Touche bas
+                     */
+                    if (cmd_last_index + 1 < cmd_history.length) {
+
+                        $(this).val(cmd_history[cmd_last_index +1]);
+                        cmd_last_index++;
+
+                    }
+                }
+
+            });
+
             /**
              * EVENEMENT lecture du clavier
              */
-            $line.find("input").keypress(function (e) {
+            $line.find("input").bind('keypress',function (e) {
 
-                if (e.charCode == 13) {
+                if (e.keyCode == 13) {
 
                     let cmd = $('.ow_terminal_reading_line').find("input").val();
+
+                    /**
+                     * History management
+                     */
+
+                    if (cmd_history[cmd_history.length - 1] != cmd) {
+
+                        cmd_history.push(cmd);
+                        cmd_last_index = cmd_history.length;
+
+                    }
 
                     if (cmd === "cls"){
 
@@ -75,7 +122,7 @@ $(document).ready(function () {
                         }
 
                         function error($result) {
-                            console.log($result)
+
                             var div_response = '<div>' +
                                                     '<p>' + $result.responseText +
                                                     '</p>' +
@@ -117,8 +164,6 @@ $(document).ready(function () {
     $('.ow_terminal_link').click(function () {
 
         $('.ow_console_viewer').toggleClass('ow_console_viewer_invisible');
-
-        console.log($('.ow_console_viewer').hasClass('ow_console_viewer_invisible'))
 
         if ($('.ow_console_viewer').hasClass('ow_console_viewer_invisible') === false) {
 

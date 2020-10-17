@@ -539,8 +539,75 @@ class OW_Application_Cmd extends OW_Base_Command{
      */
     public static function startExecApplicationMigrationMake(array $params){
 
-        return 'Not Ready yet ';
 
+        $files_names = recursiv_find_files(ROOT . DS . 'app' . DS . 'models', '.php');
+
+        $sql_rebase = "";
+        $migrate_code = "";
+
+        foreach ($files_names as $key => $value) {
+
+            $model_class_name = substr(basename($value), 0,-4);
+            $instance = new $model_class_name();
+            $sql_migration = "\n\n";
+            $sql_migration .= $instance->getSqlMigration();
+
+            $migrate_code .= "\n\n";
+            $migrate_code .= '
+$sql ="
+'. $sql_migration  .'";
+
+        foreach(explode(";", $sql) as $sub_sql) {
+            
+            if (!empty($sub_sql)){
+            
+                $result = OW_System::$db->query($sub_sql);
+            
+            }
+        
+        }
+            ';
+        }
+
+        $php_code = '
+<?php
+
+/**
+ * Security script access
+ */
+defined(\'ROOT\') OR exit(\'No direct script access allowed\');
+
+class App_Migration extends OW_Base_Migration{
+
+
+    /**
+     * Function qui lance l\'execution de la migration en avant
+     * @return true
+     */
+    static function migrate(): bool
+    {
+        OW_System::$db->trans_start();
+        '. $migrate_code .'
+        return OW_System::$db->trans_complete();
+    }
+
+    /**
+     * Function qui lance l\'execution de la migration en arriere
+     * @return true
+     */
+    static function rebase(): bool
+    {
+        $sql ="
+'. $sql_rebase  .'";
+        
+        $result = OW_System::$db->query($sql);
+        return $result->result_array();
+    }
+}';
+
+        create_file_content($php_code, ROOT . DS . "app" . DS . "migrations" . DS . "app_migration.php");
+
+        return "Migration file successful created !";
     }
 
     /**
@@ -571,7 +638,8 @@ class OW_Application_Cmd extends OW_Base_Command{
      */
     public static function startExecApplicationMigrationMigrate(array $params){
 
-        return 'Not Ready yet ';
+        App_Migration::migrate();
+        return 'Migration successful executed !';
 
     }
 

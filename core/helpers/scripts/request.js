@@ -4,7 +4,7 @@
  */
 
 var OW = {
-    get : function(url, params, call_back_success, call_back_error , return_type ='json'){
+    get : function(url, params, call_back_success = '', call_back_error = '', return_type ='json'){
         /**
          * Gestion des requestes de type get
          */
@@ -17,12 +17,28 @@ var OW = {
                 dataType : return_type,
                 success : function (result){
 
-                    call_back_success(result);
+                    if (call_back_success === '') {
+
+                        console.log(result);
+
+                    } else {
+
+                        call_back_success(result);
+
+                    }
 
                 },
                 error : function (result){
 
-                    call_back_error(result);
+                    if (call_back_error === '') {
+
+                        console.log(result);
+
+                    } else {
+
+                        call_back_error(result);
+
+                    }
 
                 }
             }
